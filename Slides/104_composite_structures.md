@@ -20,6 +20,8 @@ class: lead
 
 Une **liste** est une collection d'éléments, potentiellement de types différents.
 
+Remarque `20L` représente un entier L force le type `integer`
+
 ```r
 l <- list(
   name = "Alice",
@@ -39,8 +41,8 @@ str(l)
 
 ```r
 l["age"]
-l[["age"]]
-l$age
+l[["age"]] 
+l$age # meme chose que ce qui précède 
 ```
 
 Vérifiez les types avec `typeof`
@@ -55,6 +57,9 @@ lapply(values, sum)
 ```
 
 Point technique: `lapply()` renvoie toujours une liste.
+
+>Liste → lapply()
+>Matrice / array → apply()
 
 ---
 
@@ -166,7 +171,7 @@ apply(a, 2, sum)  # somme sur la 2e dimension
 
 ## Attributes — définition
 
-Les **attributs** sont des méta-données attachées à un objet:
+Les **attributs** sont des méta-données attachées à un objet, attention un vecteur n'a pas de clé mais peut avoir des noms.
 
 - `names`, `dim`, `class`, `levels`, …
 
@@ -185,7 +190,6 @@ Beaucoup d'objets sont des vecteurs + un `class`.
 d <- as.Date("2026-01-01")
 typeof(d)
 class(d) # permet de vérifier ici que c'est une Date 
-
 ```
 
 ---
@@ -209,7 +213,7 @@ Pourquoi `d` et `e` donnent-ils exactement la même valeur numérique (`20454`) 
 <details>
 <summary>💡 Réponse</summary>
 
-En R, une **date (`Date`) est stockée comme le nombre de jours écoulés depuis le 1ᵉʳ janvier 1970** (l'epoch Unix).
+En R, une **date (`Date`) est stockée comme le nombre de jours écoulés depuis le 1ᵉʳ janvier 1970** (l'epoch Unix , epoch un point de départ dans le temps)
 
 - `d` est une **date** :
   → un nombre (`double`) représentant des jours depuis 1970, avec la classe `"Date"`

@@ -11,7 +11,9 @@ rm(list = ls())
 
 ```r
 # pacman est un package qui permet de gérer facilement les packages 
-if(!require(pacman)) install.pacakge("pacman")
+if (!require("pacman", quietly = TRUE)) {
+  install.packages("pacman")
+}
 library(pacman)
 
 # installe le package s'il manque le charge s'il est déjà installé
