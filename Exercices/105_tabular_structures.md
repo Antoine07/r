@@ -1,5 +1,14 @@
 # TP — Analyse de ventes avec `tibble`
 
+```r
+if (!require("pacman", quietly = TRUE)) {
+  install.packages("pacman")
+}
+library(pacman)
+
+pacman::p_load(readr, dplyr, tibble, lubridate)
+```
+
 ## Contexte métier
 
 Vous travaillez au sein d'une équipe **data / reporting**.
@@ -58,7 +67,6 @@ Votre mission est de **préparer, analyser et synthétiser** ces données pour a
 ### Analyse par produit
 
 1. Calculer :
-
    * le chiffre d'affaires total par produit
    * le nombre total d'unités vendues par produit
 2. Identifier le produit le plus rentable (CA).
@@ -79,7 +87,6 @@ Votre mission est de **préparer, analyser et synthétiser** ces données pour a
 ## Partie 5 — Synthèse et restitution
 
 1. Construire un **tibble de synthèse** contenant :
-
    * le CA total
    * le CA moyen par jour
    * le nombre total de ventes

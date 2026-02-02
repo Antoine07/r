@@ -5,91 +5,50 @@ paginate: true
 class: lead
 ---
 
-# Plan du cours — R & RStudio (2 jours)
+# Cours R — Index (GitHub Pages)
+
+Site: https://antoine07.github.io/r
+
+Objectif: fournir une navigation vers toutes les pages HTML générées dans `docs/`.
 
 ---
 
-## Objectif
+## Plan
 
-- Prendre en main R et RStudio
-- Importer, nettoyer et transformer des données
-- Faire de la dataviz avec `ggplot2`
-- Produire des statistiques descriptives et des analyses simples
+- Plan du cours: [plan.html](https://antoine07.github.io/r/plan.html)
 
 ---
 
-## Organisation (2 jours)
+## Chapitres — Introduction & setup
 
-Jour 1 — bases + data + dataviz
-- workflow RStudio + projets
-- syntaxe de base R + NA
-- structures (vecteurs, data frame / tibble)
-- import CSV + nettoyage
-- `dplyr` (filter/mutate/summarise/group_by)
-- `ggplot2` (bar/line/scatter/boxplot + facettes)
-
-Jour 2 — stats simples + interprétation
-- descriptif (moyenne, médiane, variance, quantiles)
-- tests simples (t-test, chi2) + lecture de résultats
-- corrélation + régression linéaire (`lm`)
-- exporter données/graphiques + mini reporting
+- [000 — Introduction: pourquoi R ?](https://antoine07.github.io/r/000_intro_why_r.html)
+- [000 — Installer R & RStudio](https://antoine07.github.io/r/000_install_r_rstudio.html)
+- [101 — RStudio: workflow](https://antoine07.github.io/r/101_rstudio_workflow.html)
+- [107 — Organiser un projet R](https://antoine07.github.io/r/107_project_structure.html)
 
 ---
 
-## Slides (ordre recommandé)
+## Chapitres — Fondamentaux langage / data
 
-Introduction:
-- `SlideR/000_intro_why_r.md`
-
-Installation:
-- `SlideR/000_install_r_rstudio.md`
-
-Jour 1:
-- `SlideR/101_rstudio_workflow.md`
-- `SlideR/107_project_structure.md`
-- `SlideR/103_memory_vectors.md`
-- `SlideR/104_composite_structures.md`
-- `SlideR/105_tabular_structures.md`
-- `SlideR/102_r_basics_syntax.md`
-- `SlideR/108_import_cleaning.md`
-- `SlideR/106_data_manipulation.md`
-- `SlideR/110_ggplot2_intro.md`
-
-Jour 2:
-- `SlideR/201_stats_descriptive.md`
-- `SlideR/202_tests_inference.md`
-- `SlideR/203_regression.md`
-- `SlideR/204_reporting_export.md`
+- [103 — Modèle mémoire et vecteurs atomiques](https://antoine07.github.io/r/103_memory_vectors.html)
+- [104 — Structures composées (listes, matrices, arrays, attributes)](https://antoine07.github.io/r/104_composite_structures.html)
+- [105 — Structures tabulaires (data.frame, tibble, data.table)](https://antoine07.github.io/r/105_tabular_structures.html)
+- [102 — Syntaxe R (programmation de base)](https://antoine07.github.io/r/102_r_basics_syntax.html)
+- [108 — Import & nettoyage](https://antoine07.github.io/r/108_import_cleaning.html)
+- [106 — Manipulation de données (dplyr, tidyr)](https://antoine07.github.io/r/106_data_manipulation.html)
+- [110 — `ggplot2` (introduction)](https://antoine07.github.io/r/110_ggplot2_intro.html)
 
 ---
 
-## Fil rouge (dataset)
+## Chapitres — Statistiques & reporting
 
-- CSV: `TPs/r/data/sales.csv`
-- Variables: `date`, `region`, `product`, `units`, `price`
-- Objectif: créer `revenue = units * price`, analyser et visualiser
-
----
-
-## Check rapide (code de départ)
-
-```r
-install.packages("tidyverse")
-library(tidyverse)
-
-sales <- read_csv("TPs/r/data/sales.csv") |>
-  mutate(
-    date = as.Date(date),
-    revenue = units * price
-  )
-
-sales |> group_by(region) |> summarise(revenue_total = sum(revenue), .groups = "drop")
-```
+- [201 — Statistiques descriptives](https://antoine07.github.io/r/201_stats_descriptive.html)
+- [202 — Tests (inférence)](https://antoine07.github.io/r/202_tests_inference.html)
+- [203 — Corrélation & régression](https://antoine07.github.io/r/203_regression.html)
+- [204 — Export & reporting](https://antoine07.github.io/r/204_reporting_export.html)
 
 ---
 
-## Sujets (à rendre)
+## Annexes
 
-- Exercices: `Exercices/README.md`
-- TPs: `TPs/README.md`
-- Corrections: `Corrections/README.md`
+- [109 — `dplyr` (annexe)](https://antoine07.github.io/r/109_dplyr_basics.html)

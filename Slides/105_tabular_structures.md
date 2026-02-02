@@ -305,6 +305,176 @@ cube <- xtabs(revenue ~ region + product + date, data = sales)
 
 ---
 
+
+## Explication claire du code (ce que font vraiment ces lignes)
+
+```r
+ca_by_region <- sales |>
+  group_by(region) |>
+  summarise(
+    total_revenue = sum(revenue),
+    .groups = "drop"
+  )
+```
+
+### Lecture métier (la bonne)
+
+> “À partir des ventes, calculer le chiffre d’affaires total **par région**.”
+
+---
+
+### Ligne par ligne
+
+```r
+sales |>
+```
+
+👉 on part du tibble `sales`
+
+---
+
+```r
+group_by(region) |>
+```
+
+👉 on **regroupe les lignes par région**
+👉 R ne calcule encore rien
+👉 il change juste la *logique de lecture* du tableau
+
+Exemple mental :
+
+```
+North  → lignes 1, 5, 8
+South  → lignes 2, 4, 9
+East   → lignes 3, 7
+```
+
+---
+
+```r
+summarise(
+  total_revenue = sum(revenue),
+  .groups = "drop"
+)
+```
+
+👉 pour **chaque groupe** :
+
+- on calcule `sum(revenue)`
+- on obtient **une ligne par région**
+
+`.groups = "drop"` :
+
+- supprime le regroupement après le calcul
+- évite des effets de bord plus tard
+
+---
+
+### Résultat attendu
+
+Un **nouveau tibble** :
+
+| region | total_revenue |
+| ------ | ------------- |
+| North  | …             |
+| South  | …             |
+| East   | …             |
+| West   | …             |
+
+👉 **moins de lignes**
+👉 **plus de synthèse**
+
+---
+
+##  Pourquoi ce code est fondamental en data
+
+Ce pattern :
+
+```r
+group_by(...) |> summarise(...)
+```
+
+c’est :
+
+- l’équivalent du `GROUP BY` SQL
+- la base de **toute analyse métier**
+- indispensable pour le reporting
+
+👉 **on ne peut pas l’ignorer dans le cours**
+
+---
+
+## Ce qu’il faut ajouter au cours (slides minimales)
+
+Voici **les 3 slides qu’il faut absolument ajouter**
+👉 sans alourdir
+👉 parfaitement alignées avec le TP
+
+---
+
+###  Agréger des données (idée générale)
+
+## Agréger des données — idée clé
+
+En analyse métier, on cherche souvent à :
+
+- regrouper des lignes
+- calculer des indicateurs
+- obtenir une vue synthétique
+
+Exemples :
+- chiffre d’affaires par région
+- ventes par produit
+- performance par jour
+
+👉 C’est le rôle de `group_by()` et `summarise()`.
+
+---
+
+###  `group_by()`
+
+## `group_by()` — créer des groupes
+
+`group_by()` change la manière dont les données sont lues.
+
+```r
+sales |> group_by(region)
+```
+
+- les lignes sont regroupées par région
+- aucune valeur n’est encore calculée
+- le tableau est prêt pour une agrégation
+
+👉 `group_by()` ne résume pas, il **prépare**.
+
+```
+
+---
+
+###  `summarise()`
+
+## `summarise()` — produire des indicateurs
+
+`summarise()` permet de calculer des valeurs
+à partir de groupes.
+
+```r
+sales |>
+  group_by(region) |>
+  summarise(total_revenue = sum(revenue))
+```
+
+- une ligne par groupe
+- les colonnes sont des indicateurs métier
+- le nombre de lignes diminue
+
+👉 `summarise()` transforme des données détaillées
+👉 en données de pilotage.
+
+
+
+---
+
 ## Exercice
 
 `Exercices/105_tabular_structures.md`
