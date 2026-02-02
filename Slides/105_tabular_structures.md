@@ -195,7 +195,7 @@ result <- x |>
   f()
 ```
 
-👉 Lecture naturelle : *“prendre x, puis …”*
+👉 Lecture naturelle : *"prendre x, puis …"*
 
 ---
 
@@ -215,6 +215,7 @@ result <- x |>
 Chaque calcul est fait **ligne par ligne**.
 
 ```r
+# mutate est dans cette librarie, on la charge 
 pacman::p_load(dplyr)
 
 sales <- sales |>
@@ -224,33 +225,210 @@ sales <- sales |>
 ```
 
 👉 Lecture métier :
-*“le chiffre d'affaires d'une ligne vaut quantité × prix”*
+*"le chiffre d'affaires d'une ligne vaut quantité × prix"*
 
 ---
 
-## `mutate()` — points importants
+`mutate()` sert à **ajouter une colonne calculée** à un tableau de données (tibble / data frame).
 
-- retourne un **nouveau tibble**
-- ne modifie pas l'objet initial par défaut
-- peut créer plusieurs colonnes
-- une colonne créée peut être réutilisée immédiatement
+👉 **Règle clé** : le calcul se fait **ligne par ligne**, automatiquement.
+
+---
+
+### Données de départ (`sales`)
+
+Imaginons :
+
+| product | units | price |
+| ------- | ----- | ----- |
+| A       | 2     | 10    |
+| B       | 5     | 8     |
+| C       | 1     | 20    |
+
+---
+
+### Code
 
 ```r
 sales <- sales |>
   mutate(
-    revenue = units * price,
-    high_value = revenue > 500
+    revenue = units * price
   )
 ```
 
 ---
 
-## `mutate()` vs agrégation
+### Ce que R fait en réalité
 
--`mutate()` → **ajoute des colonnes**
--`summarise()` → **réduit le nombre de lignes**
+R lit **chaque ligne** et applique la formule :
 
-👉 Toujours enrichir les données **avant** de les agréger.
+* Ligne 1 → `2 * 10 = 20`
+* Ligne 2 → `5 * 8 = 40`
+* Ligne 3 → `1 * 20 = 20`
+
+---
+
+### Résultat
+
+| product | units | price | revenue |
+| ------- | ----- | ----- | ------- |
+| A       | 2     | 10    | 20      |
+| B       | 5     | 8     | 40      |
+| C       | 1     | 20    | 20      |
+
+👉 `revenue` est **une nouvelle colonne**, pas une variable unique.
+
+---
+
+## Pourquoi on dit "ligne par ligne"
+
+Parce que :
+
+- `units` est un **vecteur**
+- `price` est un **vecteur**
+- `units * price` est fait **élément par élément**
+
+C'est **vectorisé**, pas une boucle explicite.
+
+---
+
+## À ne pas confondre
+
+* ❌ `mutate()` ne résume pas les données
+  (ça, c'est `summarise()`)
+
+* ❌ `mutate()` ne crée pas une seule valeur
+  (une valeur par ligne)
+
+---
+
+## `summarise()`
+
+`summarise()` sert à **réduire les données** en **valeurs agrégées**.
+
+👉 **Règle clé** : le calcul se fait **sur l'ensemble des lignes** (ou par groupe), pas ligne par ligne.
+
+---
+
+### `sales`
+
+Imaginons :
+
+| product | units | price |
+| ------- | ----- | ----- |
+| A       | 2     | 10    |
+| B       | 5     | 8     |
+| C       | 1     | 20    |
+
+---
+
+### Code
+
+```r
+pacman::p_load(dplyr)
+
+sales_summary <- sales |>
+  summarise(
+    total_units   = sum(units),
+    total_revenue = sum(units * price),
+    avg_price     = mean(price)
+  )
+```
+
+---
+
+## Ce que R fait en réalité
+
+Il ne travaille **plus ligne par ligne** :
+
+* `sum(units)` → 2 + 5 + 1 = **8**
+* `sum(units * price)` → 20 + 40 + 20 = **80**
+* `mean(price)` → (10 + 8 + 20) / 3 = **12.67**
+
+---
+
+## Résultat
+
+| total_units | total_revenue | avg_price |
+| ----------- | ------------- | --------- |
+| 8           | 80            | 12.67     |
+
+👉 Le tableau est **réduit à une seule ligne**.
+
+---
+
+## Pourquoi on dit "résumer"
+
+Parce que :
+
+- plusieurs lignes d'entrée
+- **une ou quelques lignes en sortie**
+- information **synthétique**
+
+---
+
+## À ne pas confondre
+
+* ❌ `summarise()` ne crée pas une colonne par ligne
+* ❌ `summarise()` ne conserve pas le détail
+
+---
+
+## Avec regroupement `group_by()`
+
+```r
+sales |>
+  group_by(product) |>
+  summarise(
+    total_units = sum(units),
+    total_revenue = sum(units * price)
+  )
+```
+
+➡️ Résumé **par produit**, une ligne par groupe.
+
+---
+
+sales
+┌─────────┬────────┬───────┐
+│ product │ units  │ price │
+├─────────┼────────┼───────┤
+│ A       │   2    │  10   │
+│ A       │   1    │  10   │
+│ B       │   5    │   8   │
+│ B       │   3    │   8   │
+│ C       │   1    │  20   │
+└─────────┴────────┴───────┘
+
+
+---
+
+┌─────────┬─────────────┬───────────────┐
+│ product │ total_units │ total_revenue │
+├─────────┼─────────────┼───────────────┤
+│ A       │      3      │      30       │
+│ B       │      8      │      64       │
+│ C       │      1      │      20       │
+└─────────┴─────────────┴───────────────┘
+
+---
+
+sales
+
+```r
+sales <- tibble(
+  product = c("A", "A", "B", "B", "C"),
+  units   = c(2, 1, 5, 3, 1),
+  price   = c(10, 10, 8, 8, 20)
+)
+
+sales |>
+  group_by(product) |>
+  summarise(
+    total_units = sum(units)
+)
+
+```
 
 ---
 
@@ -282,196 +460,23 @@ Exemples de questions auxquelles il répond :
 
 ---
 
-## Cube analytique — représentation en R
-
-En R, un cube analytique est généralement représenté par un
-**array multidimensionnel**.
-
 ```r
-cube <- xtabs(revenue ~ region + product + date, data = sales)
-```
+pacman::p_load(tibble)
 
-- chaque axe du cube = une **dimension** (région, produit, date)
-- chaque cellule = une **mesure agrégée** (ici : le CA)
-
-À partir du cube, on peut :
-
-- agréger par région, produit ou date
-- construire des indicateurs de pilotage
-- alimenter un reporting ou un tableau de bord
-
-👉 Le cube est **dérivé des données brutes**,
-👉 pas une structure de stockage primaire.
-
----
-
-
-## Explication claire du code (ce que font vraiment ces lignes)
-
-```r
-ca_by_region <- sales |>
-  group_by(region) |>
-  summarise(
-    total_revenue = sum(revenue),
-    .groups = "drop"
-  )
-```
-
-### Lecture métier (la bonne)
-
-> “À partir des ventes, calculer le chiffre d’affaires total **par région**.”
-
----
-
-### Ligne par ligne
-
-```r
-sales |>
-```
-
-👉 on part du tibble `sales`
-
----
-
-```r
-group_by(region) |>
-```
-
-👉 on **regroupe les lignes par région**
-👉 R ne calcule encore rien
-👉 il change juste la *logique de lecture* du tableau
-
-Exemple mental :
-
-```
-North  → lignes 1, 5, 8
-South  → lignes 2, 4, 9
-East   → lignes 3, 7
-```
-
----
-
-```r
-summarise(
-  total_revenue = sum(revenue),
-  .groups = "drop"
+sales <- tibble(
+  region  = c("EU", "EU", "EU", "US", "US", "US"),
+  product = c("A",  "A",  "B",  "A",  "B",  "B"),
+  date    = as.Date(c(
+    "2024-01-01",
+    "2024-01-01",
+    "2024-01-01",
+    "2024-01-02",
+    "2024-01-02",
+    "2024-01-02"
+  )),
+  revenue = c(100, 50, 80, 120, 60, 40)
 )
 ```
-
-👉 pour **chaque groupe** :
-
-- on calcule `sum(revenue)`
-- on obtient **une ligne par région**
-
-`.groups = "drop"` :
-
-- supprime le regroupement après le calcul
-- évite des effets de bord plus tard
-
----
-
-### Résultat attendu
-
-Un **nouveau tibble** :
-
-| region | total_revenue |
-| ------ | ------------- |
-| North  | …             |
-| South  | …             |
-| East   | …             |
-| West   | …             |
-
-👉 **moins de lignes**
-👉 **plus de synthèse**
-
----
-
-##  Pourquoi ce code est fondamental en data
-
-Ce pattern :
-
-```r
-group_by(...) |> summarise(...)
-```
-
-c’est :
-
-- l’équivalent du `GROUP BY` SQL
-- la base de **toute analyse métier**
-- indispensable pour le reporting
-
-👉 **on ne peut pas l’ignorer dans le cours**
-
----
-
-## Ce qu’il faut ajouter au cours (slides minimales)
-
-Voici **les 3 slides qu’il faut absolument ajouter**
-👉 sans alourdir
-👉 parfaitement alignées avec le TP
-
----
-
-###  Agréger des données (idée générale)
-
-## Agréger des données — idée clé
-
-En analyse métier, on cherche souvent à :
-
-- regrouper des lignes
-- calculer des indicateurs
-- obtenir une vue synthétique
-
-Exemples :
-- chiffre d’affaires par région
-- ventes par produit
-- performance par jour
-
-👉 C’est le rôle de `group_by()` et `summarise()`.
-
----
-
-###  `group_by()`
-
-## `group_by()` — créer des groupes
-
-`group_by()` change la manière dont les données sont lues.
-
-```r
-sales |> group_by(region)
-```
-
-- les lignes sont regroupées par région
-- aucune valeur n’est encore calculée
-- le tableau est prêt pour une agrégation
-
-👉 `group_by()` ne résume pas, il **prépare**.
-
-```
-
----
-
-###  `summarise()`
-
-## `summarise()` — produire des indicateurs
-
-`summarise()` permet de calculer des valeurs
-à partir de groupes.
-
-```r
-sales |>
-  group_by(region) |>
-  summarise(total_revenue = sum(revenue))
-```
-
-- une ligne par groupe
-- les colonnes sont des indicateurs métier
-- le nombre de lignes diminue
-
-👉 `summarise()` transforme des données détaillées
-👉 en données de pilotage.
-
-
 
 ---
 
