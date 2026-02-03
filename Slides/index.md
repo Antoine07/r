@@ -3,6 +3,7 @@ marp: true
 theme: default
 paginate: true
 class: lead
+header: "[index](https://antoine07.github.io/r)"
 ---
 
 # Cours R — Index (GitHub Pages)
@@ -33,6 +34,7 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 - [103 — Modèle mémoire et vecteurs atomiques](https://antoine07.github.io/r/103_memory_vectors.html)
 - [104 — Structures composées (listes, matrices, arrays, attributes)](https://antoine07.github.io/r/104_composite_structures.html)
 - [105 — Structures tabulaires (data.frame, tibble, data.table)](https://antoine07.github.io/r/105_tabular_structures.html)
+- [105.1 — Cubes (tableaux de contingence)](https://antoine07.github.io/r/105_1_cubes.html)
 - [102 — Syntaxe R (programmation de base)](https://antoine07.github.io/r/102_r_basics_syntax.html)
 - [108 — Import & nettoyage](https://antoine07.github.io/r/108_import_cleaning.html)
 - [106 — Manipulation de données (dplyr, tidyr)](https://antoine07.github.io/r/106_data_manipulation.html)

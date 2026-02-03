@@ -3,6 +3,7 @@ marp: true
 theme: default
 paginate: true
 class: lead
+header: "[index](https://antoine07.github.io/r)"
 ---
 
 # Dataviz avec `ggplot2`

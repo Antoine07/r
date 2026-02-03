@@ -3,6 +3,7 @@ marp: true
 theme: default
 paginate: true
 class: lead
+header: "[index](https://antoine07.github.io/r)"
 ---
 
 # Structures tabulaires en R
@@ -483,4 +484,3 @@ sales <- tibble(
 ## Exercice
 
 `Exercices/105_tabular_structures.md`
-

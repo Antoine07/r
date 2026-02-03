@@ -3,6 +3,7 @@ marp: true
 theme: default
 paginate: true
 class: lead
+header: "[index](https://antoine07.github.io/r)"
 ---
 
 # Chapitre 2 — Structures composées
@@ -240,4 +241,3 @@ Ce qui change n'est **pas la valeur**, mais **le sens métier** :
 ## Exercice - les structures de données
 
 Sujet: `Exercices/104_composite_structures.md`
-

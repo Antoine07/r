@@ -3,6 +3,7 @@ marp: true
 theme: default
 paginate: true
 class: lead
+header: "[index](https://antoine07.github.io/r)"
 ---
 
 # Chapitre 4 — Manipulation de données
@@ -119,4 +120,3 @@ long |>
 ## Exercice (chapitre 4)
 
 Sujet: `Exercices/106_data_manipulation.md`
-
