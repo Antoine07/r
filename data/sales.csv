@@ -1,0 +1,50 @@
+date,region,product,units,price
+2026-01-01,North,Keyboard,12,49.99
+2026-01-01,North,Mouse,25,19.99
+2026-01-01,South,Keyboard,8,49.99
+2026-01-01,East,Mouse,20,19.99
+2026-01-01,West,Keyboard,15,49.99
+2026-01-02,South,Mouse,18,19.99
+2026-01-02,East,Monitor,4,199.99
+2026-01-02,West,Keyboard,10,49.99
+2026-01-02,North,USB-C Cable,35,9.99
+2026-01-02,East,Keyboard,11,49.99
+2026-01-03,North,Monitor,3,199.99
+2026-01-03,South,USB-C Cable,40,9.99
+2026-01-03,East,Mouse,22,19.99
+2026-01-03,West,USB-C Cable,55,9.99
+2026-01-03,North,Keyboard,9,49.99
+2026-01-04,East,Keyboard,11,49.99
+2026-01-04,South,Monitor,2,199.99
+2026-01-04,West,Mouse,30,19.99
+2026-01-04,North,USB-C Cable,60,9.99
+2026-01-04,South,Keyboard,14,49.99
+2026-01-05,North,Mouse,28,19.99
+2026-01-05,East,USB-C Cable,45,9.99
+2026-01-05,West,Monitor,5,199.99
+2026-01-05,South,Mouse,16,19.99
+2026-01-05,North,Keyboard,13,49.99
+2026-01-06,East,Mouse,21,19.99
+2026-01-06,South,USB-C Cable,50,9.99
+2026-01-06,West,Keyboard,17,49.99
+2026-01-06,North,Monitor,4,199.99
+2026-01-06,East,Keyboard,12,49.99
+2026-01-07,North,USB-C Cable,65,9.99
+2026-01-07,South,Keyboard,9,49.99
+2026-01-07,West,Mouse,26,19.99
+2026-01-07,East,Monitor,3,199.99
+2026-01-07,North,Mouse,31,19.99
+2026-01-08,South,USB-C Cable,42,9.99
+2026-01-08,East,Keyboard,14,49.99
+2026-01-08,West,Monitor,6,199.99
+2026-01-08,North,Keyboard,16,49.99
+2026-01-08,South,Mouse,19,19.99
+2026-01-09,East,USB-C Cable,38,9.99
+2026-01-09,West,Keyboard,11,49.99
+2026-01-09,North,Monitor,5,199.99
+2026-01-09,South,Keyboard,10,49.99
+2026-01-09,East,Mouse,24,19.99
+2026-01-10,West,USB-C Cable,58,9.99
+2026-01-10,North,Keyboard,18,49.99
+2026-01-10,South,Monitor,4,199.99
+2026-01-10,East,Keyboard,13,49.99
