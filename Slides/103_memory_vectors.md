@@ -108,8 +108,8 @@ r2 <- r * 2
 
 ### À retenir
 
-* Accès ponctuel (`r[i]`, `head(r)`) → reste léger
-* Calcul vectoriel global (`r * 2`, `sum(r)`) → **matérialisation et coût mémoire**
+- Accès ponctuel (`r[i]`, `head(r)`) → reste léger
+- Calcul vectoriel global (`r * 2`, `sum(r)`) → **matérialisation et coût mémoire**
 
 👉 La compacité est une **optimisation interne**, pas une garantie pour l'utilisateur.
 
