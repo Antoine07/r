@@ -1,73 +1,72 @@
-# 106 — Manipulation de données (exercices)
+# Exercice — Analyse et restructuration de données de ventes
 
-Correspond au chapitre: `SlideR/106_data_manipulation.md`
+## Contexte métier
 
-## Pourquoi R est conçu pour
+Vous travaillez dans une équipe **data / reporting**.
+On vous fournit un extrait de ventes issues du système d'information commercial.
 
-- Enchaîner des transformations sur des tables de façon déclarative.
-- Passer d'une table brute à une table “tidy” (propre) pour analyse et dataviz.
+Chaque ligne correspond à une transaction avec :
 
-## Pré-requis
+* `date` : date de la vente
+* `region` : région commerciale
+* `product` : produit vendu
+* `units` : quantité vendue
+* `price` : prix unitaire
 
-Créer un objet `sales` avec les colonnes:
+L'objectif est de **produire des indicateurs exploitables** à partir de ces données.
 
-- `date` (Date)
-- `region`, `product`
-- `units`, `price`
-- `revenue = units * price`
+```r
+url <- "https://raw.githubusercontent.com/Antoine07/r/refs/heads/main/data/sales.csv"
+sales <- readr::read_csv(url, show_col_types = FALSE)
 
-## Notions techniques à couvrir (checklist)
+# Aperçu rapide des premières lignes pour comprendre la structure
+head(sales)
 
-- `dplyr`: `select`, `filter`, `arrange`, `mutate`, `group_by`/`summarise`
-- `tidyr`: `pivot_longer`, `pivot_wider`, `separate`/`unite` (option)
-- pipe `|>`
-- agrégation 1 clé → 2 clés
-
----
-
-## Exercice 1 — Préparer `sales`
-
-1. Importer `TPs/r/data/sales.csv` avec `readr::read_csv`.
-2. Créer `revenue` et convertir `date`.
-3. Vérifier: `sum(is.na(sales$revenue)) == 0`.
-
-## Exercice 2 — Sélection / filtre / tri
-
-1. Garder uniquement `date`, `region`, `product`, `revenue`.
-2. Filtrer les ventes de `North` avec `units >= 10`.
-3. Trier par `revenue` décroissant.
-
-## Exercice 3 — Variables dérivées
-
-Ajouter:
-
-- `is_bulk = units >= 20`
-- `ticket = "HIGH"` si `revenue >= 500`, sinon `"LOW"`
-
-## Exercice 4 — Agrégation (1 clé)
-
-Calculer une table `by_region` avec:
-
-- `n_sales` (nombre de lignes)
-- `revenue_total` (somme)
-- `revenue_mean` (moyenne)
-
-## Exercice 5 — Agrégation (2 clés)
-
-Calculer une table `by_region_product` avec:
-
-- `revenue_total` par `(region, product)`
-- tri décroissant au sein de chaque région (ou tri global)
-
-## Bonus — Top N
-
-Pour chaque région, extraire les 2 produits qui génèrent le plus de revenu.
+# Résumé statistique global pour détecter valeurs aberrantes ou incohérences
+summary(sales)
+```
 
 ---
 
-## Exercice 6 — `tidyr` (wide → long → wide)
+## Partie 1 — Préparation des données
 
-1. Créer un objet `wide`:
+1. Vérifier le type des colonnes.
+1. Créer une colonne `revenue` correspondant au chiffre d'affaires par ligne.
+1. Vérifier que la colonne `date` est bien de type `Date`.
+
+---
+
+## Partie 2 — Filtrage et tri (logique ligne)
+
+À partir de la table `sales` :
+
+1. Conserver uniquement les ventes de la région `"North"`.
+1. Parmi ces ventes, garder celles dont `units >= 10`.
+1. Trier les résultats par chiffre d'affaires décroissant.
+1. Ne conserver que les colonnes suivantes :
+
+   * `date`
+   * `product`
+   * `units`
+   * `revenue`
+
+---
+
+## Partie 3 — Agrégation métier
+
+1. Calculer, par région :
+
+   * le nombre de ventes
+   * le chiffre d'affaires total
+   * le chiffre d'affaires moyen
+1. Expliquer en une phrase le rôle de `group_by()` et de `summarise()` dans ce calcul.
+1. Identifier la région avec le chiffre d'affaires total le plus élevé.
+
+---
+
+## Partie 4 — Passage du format wide au format long
+
+On vous fournit maintenant la table suivante :
 
 ```r
 wide <- tibble::tibble(
@@ -77,7 +76,39 @@ wide <- tibble::tibble(
 )
 ```
 
-2. Transformer en “long” avec `tidyr::pivot_longer`:
-   - `names_to = "year"`
-   - `values_to = "revenue"`
-3. Revenir en “wide” avec `tidyr::pivot_wider`.
+1. Expliquer pourquoi cette table est au format **wide**.
+1. Transformer cette table en un format **long** avec :
+
+   * une colonne `year`
+   * une colonne `revenue`
+1. Vérifier le nombre de lignes du tableau obtenu et expliquer ce résultat.
+
+---
+
+## Partie 5 — Exploitation du format long
+
+À partir de la table `long` :
+
+1. Nettoyer la colonne `year` pour ne conserver que l'année (`2025`, `2026`).
+1. Convertir `year` en entier.
+1. Calculer le chiffre d'affaires total par année.
+1. Expliquer pourquoi ces calculs sont plus simples en format long qu'en format wide.
+
+---
+
+## Question de raisonnement (importante)
+
+En quelques lignes :
+
+1. Dans quels cas un format **wide** peut-il être préférable ?
+1. Pourquoi le format **long** est-il privilégié en analyse de données et en reporting ?
+
+---
+
+## Objectifs pédagogiques (non visibles par les étudiants)
+
+* utiliser le pipe `|>` pour enchaîner des transformations
+* maîtriser `select`, `filter`, `arrange`, `mutate`
+* comprendre `group_by()` et `summarise()`
+* comprendre et appliquer `pivot_longer()`
+* faire le lien **structure des données → capacité d'analyse**

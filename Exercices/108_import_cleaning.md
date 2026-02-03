@@ -1,60 +1,68 @@
-# 108 — Import & nettoyage (exercices)
+## Exercice — Nettoyage de données simples
 
-Correspond au chapitre: `SlideR/108_import_cleaning.md`
+On vous fournit un jeu de données brut `sales_raw` importé depuis un fichier CSV.
 
-## Pourquoi R est conçu pour
+### Données brutes
 
-- Importer une table (CSV) et la transformer rapidement (types, colonnes dérivées).
-- Ajouter des contrôles (qualité, invariants) dès l'entrée.
-
-## Données
-
-- Dataset: `TPs/r/data/sales.csv`
-- Colonnes attendues: `date`, `region`, `product`, `units`, `price`
-
-## Notions techniques à couvrir (checklist)
-
-- `read.csv(..., stringsAsFactors = FALSE)` et/ou `readr::read_csv`
-- parsing: `as.Date`, `as.integer`, `as.numeric` (+ `suppressWarnings`)
-- `NA`, `is.na`, `anyNA`, `na.rm`
-- contrôles: `stop`, `stopifnot`, `setdiff`, `names`
-- écriture: `dir.create`, `write.csv`, `readr::write_csv`
+```r
+sales_raw <- tibble(
+  date   = c("2024-01-01", "2024-01-02", "2024-01-03"),
+  region = c("North", "South", "North"),
+  units  = c("10", "5", "8"),
+  price  = c("49.99", "49.99", "not_available")
+)
+```
 
 ---
 
-## Exercice 1 — Import base R
+## Objectif
 
-1. Importer le fichier dans `sales_raw`.
-2. Vérifier les colonnes attendues:
-   - calculer la liste des colonnes manquantes (si existantes)
-   - arrêter avec `stop()` si une colonne manque
-3. Afficher `str(sales_raw)` et `summary(sales_raw)`.
+Produire un jeu de données propre `sales_clean` prêt à être utilisé pour des calculs.
 
-## Exercice 2 — Parsing des types
+---
 
-Créer `sales` à partir de `sales_raw` et appliquer:
+## Étapes demandées
 
-1. `sales$date <- as.Date(sales$date)`
-2. `sales$units <- as.integer(sales$units)`
-3. `sales$price <- as.numeric(sales$price)`
+1. Convertir la colonne `date` en type date
+2. Convertir les colonnes `units` et `price` en type numérique
+3. Identifier les lignes problématiques (valeurs manquantes après conversion)
+4. Supprimer les lignes invalides
+5. Créer une nouvelle colonne `revenue = units × price`
 
-Puis:
+---
 
-- vérifier que la conversion n'a pas créé de `NA` inattendus
-- vérifier que `units >= 0` et `price >= 0`
+## Contraintes
 
-## Exercice 3 — Variable dérivée
+* utiliser uniquement des fonctions simples
+* pas de validation avancée
+* pas de package supplémentaire obligatoire
 
-1. Créer `sales$revenue <- sales$units * sales$price`.
-2. Vérifier qu'il n'y a pas de `NA` dans `revenue` (ou expliquer leur origine).
+---
 
-## Exercice 4 — Version “processed”
+## Résultat attendu
 
-1. Créer le dossier `data/processed/` (si absent).
-2. Écrire `sales` dans `data/processed/sales_clean.csv`.
+Un objet `sales_clean` qui :
 
-## Bonus — Import `readr` (option)
+* contient uniquement des colonnes bien typées
+* ne contient plus de valeurs manquantes
+* permet de calculer un chiffre d’affaires
 
-1. Refaire l'import avec `readr::read_csv`.
-2. Comparer `str()` (ou `glimpse`) des deux objets.
-3. Identifier les différences de types éventuelles.
+---
+
+## Indice (facultatif)
+
+```r
+as.Date()
+as.numeric()
+is.na()
+```
+
+---
+
+## Bonus (optionnel)
+
+Afficher la structure finale :
+
+```r
+str(sales_clean)
+```

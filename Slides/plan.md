@@ -53,13 +53,6 @@ Jour 2 — stats simples + reporting
 - tests simples (t-test, chi2) + interprétation
 - exporter résultats (CSV) + rendu (Quarto/R Markdown, optionnel)
 
----
-
-## Sujets (à rendre)
-
-- Exercices: `Exercices/README.md`
-- TPs: `TPs/README.md`
-- Corrections: `Corrections/README.md`
 
 ---
 

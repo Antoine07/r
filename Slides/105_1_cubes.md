@@ -8,9 +8,7 @@ header: "[index](https://antoine07.github.io/r)"
 
 # Cubes en R (tableaux de contingence)
 
-Après les structures tabulaires (`data.frame`, tibble), un **cube** est une représentation compacte d'un indicateur agrégé sur **plusieurs axes**.
-
-Fil rouge: `TPs/r/data/sales.csv`
+Après les structures tabulaires (`data.frame`, `tibble`), un **cube** est une représentation compacte d'un indicateur agrégé sur **plusieurs axes**.
 
 ---
 

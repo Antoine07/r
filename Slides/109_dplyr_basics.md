@@ -6,9 +6,7 @@ class: lead
 header: "[index](https://antoine07.github.io/r)"
 ---
 
-# Annexe — `dplyr` (ancienne version)
-
-Remplacé par `SlideR/106_data_manipulation.md` (Chapitre 4: `dplyr` + `tidyr`).
+# Annexe — `dplyr` 
 
 Objectif: passer d'une table brute à des indicateurs.
 
@@ -45,7 +43,7 @@ Objectif: passer d'une table brute à des indicateurs.
 ## Préparer les données
 
 ```r
-library(tidyverse)
+pacman::p_load(dplyr, tidyverse)
 
 sales <- read_csv("TPs/r/data/sales.csv") |>
   mutate(
@@ -63,6 +61,8 @@ Définition: `sales` est une tibble (data frame) et `revenue` une variable déri
 ```r
 sales |>
   select(date, region, product, revenue)
+
+# le pipe fait ça : select(sales, date, region, product, revenue)
 ```
 
 ---
@@ -72,7 +72,7 @@ sales |>
 ```r
 sales |>
   filter(region == "North", units >= 10) |>
-  arrange(desc(revenue))
+  arrange(desc(revenue)) # ordonne par ordre décroissant par défaut croissant arrange
 ```
 
 ---
@@ -80,7 +80,8 @@ sales |>
 ## `mutate()`: créer des variables
 
 ```r
-sales |>
+# on enregistre ces nouvelles colonnes dans sales
+sales <- sales |>
   mutate(
     is_bulk = units >= 20,
     ticket = if_else(revenue >= 500, "HIGH", "LOW")
@@ -100,8 +101,7 @@ sales |>
   group_by(region) |>
   summarise(
     revenue_total = sum(revenue),
-    n_sales = n(),
-    .groups = "drop"
+    n_sales = n()
   )
 ```
 
@@ -112,7 +112,7 @@ sales |>
 ```r
 sales |>
   group_by(date) |>
-  summarise(revenue_total = sum(revenue), .groups = "drop")
+  summarise(revenue_total = sum(revenue))
 ```
 
 ---
@@ -124,14 +124,3 @@ sales |>
   count(region, product, sort = TRUE)
 ```
 
----
-
-## Exercice (dplyr)
-
-Sujet: `Exercices/106_data_manipulation.md`
-
-Notions à pratiquer:
-- `select`, `filter`, `arrange`, `mutate`
-- `group_by` + `summarise` (+ `.groups`)
-- agrégations à 1 clé puis 2 clés
-- vérifications simples (ex: aucun `NA` dans `revenue`)

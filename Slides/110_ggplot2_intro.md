@@ -8,131 +8,191 @@ header: "[index](https://antoine07.github.io/r)"
 
 # Dataviz avec `ggplot2`
 
-Objectif: des graphiques clairs, interprétables, et reproductibles.
+**Objectif**
+Apprendre à construire des graphiques simples avec `ggplot2`.
+
+Les exemples utilisent `mtcars`, un jeu de données déjà inclus dans R.
 
 ---
 
-## Définitions
+## Données d'exemple — `mtcars`
 
-- **Data frame / tibble**: table utilisée comme source de données.
-- **`ggplot(data, aes(...))`**: initialise un graphique avec des données et des mappings.
-- **Aesthetics (`aes`)**: correspondances entre variables et propriétés visuelles (x, y, couleur…).
-- **Geom (`geom_*`)**: couche géométrique (points, lignes, barres…).
-- **Facette (`facet_*`)**: petits multiples (un panneau par groupe).
+`mtcars` décrit des voitures :
 
----
-
-## Pourquoi R est conçu pour cette étape
-
-- `ggplot2` implémente la *grammar of graphics*: une façon cohérente de construire des graphiques.
-- Les graphes partent d'une table et restent reproductibles (code → figure).
-- Les mêmes données peuvent être déclinées en plusieurs vues sans copier/coller.
-
----
-
-## Pré-requis (objet `sales`)
-
-Les exemples supposent un objet `sales` avec une colonne `revenue`.
+- consommation (`mpg`)
+- poids (`wt`)
+- puissance (`hp`)
+- nombre de cylindres (`cyl`)
+- type de transmission (`am`)
 
 ```r
-library(tidyverse)
+pacman::p_load(tidyverse)
 
-sales <- read_csv("TPs/r/data/sales.csv") |>
+data(mtcars)
+
+cars <- mtcars |>
+  tibble::as_tibble(rownames = "model") # transforme mtcars un dataframe en tibble
+
+glimpse(cars)
+```
+
+👉 On se contente ici de rendre les données plus lisibles.
+Aucune transformation "avancée".
+
+---
+
+## Le principe de `ggplot()`
+
+Un graphique `ggplot2` se construit **par couches**.
+
+- `ggplot(data, aes(...))`
+  → quelles données et quelles variables
+- `+ geom_*()`
+  → quel type de graphique
+- `+ labs(...)`
+  → titres et légendes
+
+```r
+# nuage de point mpg = miles per gallon et wt = weight 
+ggplot(cars, aes(x = wt, y = mpg)) +
+  geom_point()
+```
+
+👉 Relation entre le poids et la consommation.
+
+---
+
+## Mapping vs valeur fixe
+
+- **Dans `aes()`** : dépend des données
+- **Hors `aes()`** : valeur imposée
+
+```r
+# cyl contient des valeurs (4, 6, 8) ggplot2 attribue une couleur différente à chaque valeur
+ggplot(cars, aes(x = wt, y = mpg, color = cyl)) +
+  geom_point(alpha = 0.8)
+```
+
+👉 La couleur dépend du nombre de cylindres.
+
+---
+
+## Comptages — `geom_bar()`
+
+`geom_bar()` compte automatiquement le nombre de lignes par catégorie.
+
+```r
+cars |>
+  group_by(cyl) |>
+  summarise(n = n()) # rappel n() compte le nombre de lignes 
+
+# Une autre manière de faire ça plus rapide 
+cars |>
+  count(cyl)
+```
+
+```r
+ggplot(cars, aes(x = cyl)) +
+  geom_bar() +
+  labs(
+    title = "Nombre de voitures par cylindres",
+    x = "Cylindres",
+    y = "Nombre"
+  )
+```
+
+👉 Chaque barre correspond à un nombre de voitures.
+
+---
+
+## Barres empilées — variable dérivée
+
+On crée une nouvelle colonne simple pour classer les voitures.
+
+```r
+cars2 <- cars |>
   mutate(
-    date = as.Date(date),
-    revenue = units * price
+    mpg_band = if_else(mpg >= 20, "Économe", "Gourmande")
+  )
+```
+
+```r
+ggplot(cars2, aes(x = cyl, fill = mpg_band)) +
+  geom_bar() +
+  labs(
+    title = "Consommation par cylindres",
+    x = "Cylindres",
+    y = "Nombre",
+    fill = "Type"
+  )
+```
+
+👉 Une même barre, découpée en sous-catégories.
+
+---
+
+## Comparer des groupes — `geom_boxplot()`
+
+Le boxplot permet de comparer des valeurs entre groupes.
+
+boxplot = diagramme à moustache 
+
+Utilisez `factor` pour créer des groupes, sinon la variable x sera considérée comme une variable continue par ggplot.
+
+```r
+ggplot(cars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot() +
+  labs(
+    title = "Consommation selon les cylindres",
+    x = "Cylindres",
+    y = "mpg"
+  )
+```
+
+```r
+ggplot(cars, aes(x = factor(cyl), y = hp)) +
+  geom_boxplot() +
+  labs(
+    title = "Puissance selon les cylindres",
+    x = "Cylindres",
+    y = "hp"
   )
 ```
 
 ---
 
-## Rappel: le modèle ggplot
-
-- `ggplot(data, aes(...))` = données + mapping
-- `geom_*` = forme (points, barres, lignes…)
-- `labs(...)` = titres/axes
-- `theme_*` = style
-
----
-
-## Mapping vs valeur constante
-
-- Dans `aes(...)`: la propriété dépend d'une variable (mapping).
-- En dehors de `aes(...)`: la propriété est constante.
+## Relations — nuage de points
 
 ```r
-ggplot(sales, aes(x = units, y = revenue)) +
-  geom_point(color = "steelblue", alpha = 0.6)
+ggplot(cars, aes(x = wt, y = mpg, color = cyl)) +
+  geom_point(alpha = 0.8) +
+  labs(
+    title = "Consommation en fonction du poids",
+    x = "Poids",
+    y = "mpg",
+    color = "Cylindres"
+  )
 ```
+
+👉 On observe si deux variables évoluent ensemble.
 
 ---
 
-## Exemple: CA dans le temps (ligne)
+## Ajouter une tendance simple
 
 ```r
-sales_daily <- sales |>
-  group_by(date) |>
-  summarise(revenue_total = sum(revenue), .groups = "drop")
-
-ggplot(sales_daily, aes(x = date, y = revenue_total)) +
-  geom_line() +
-  labs(title = "Chiffre d'affaires par jour", x = "Date", y = "CA")
+ggplot(cars, aes(x = wt, y = mpg, color = cyl)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Tendance linéaire entre poids et consommation"
+  )
 ```
 
-Définition: `sales_daily` est une table agrégée (une ligne par date).
+👉 La droite aide à lire la tendance générale.
 
 ---
 
-## Exemple: CA par région (barres)
+## Exercices — `iris`
 
-```r
-sales_by_region <- sales |>
-  group_by(region) |>
-  summarise(revenue_total = sum(revenue), .groups = "drop")
-
-ggplot(sales_by_region, aes(x = region, y = revenue_total)) +
-  geom_col() +
-  labs(title = "CA par région", x = "Région", y = "CA")
-```
-
----
-
-## Facets (petits multiples)
-
-```r
-ggplot(sales, aes(x = date, y = revenue, color = product)) +
-  geom_point(alpha = 0.6) +
-  facet_wrap(~ region)
-```
-
----
-
-## Export (fichier image)
-
-```r
-p <- ggplot(sales_by_region, aes(x = region, y = revenue_total)) +
-  geom_col()
-
-ggsave("output/figures/ca_par_region.png", p, width = 8, height = 4)
-```
-
----
-
-## Exercice (dataviz)
-
-Sujet: `Exercices/110_ggplot2_intro.md`
-
-Notions à pratiquer:
-- `aes` (mapping) vs paramètres constants
-- `geom_point`, `geom_line`, `geom_col`
-- tables agrégées vs données brutes
-- `facet_wrap` et légendes
-- `ggsave` (export reproductible)
-
----
-
-## Fin Jour 1 (checklist)
-
-- importer un CSV
-- transformer avec `dplyr`
-- produire 2–3 graphiques simples avec `ggplot2`
+Les exercices reprennent **exactement les mêmes idées** :

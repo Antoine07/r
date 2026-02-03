@@ -6,12 +6,6 @@ class: lead
 header: "[index](https://antoine07.github.io/r)"
 ---
 
-# Importer & nettoyer un CSV
-
-Fil rouge: `TPs/r/data/sales.csv`
-
----
-
 ## Définitions
 
 - **CSV**: fichier texte tabulaire (lignes/colonnes) séparé par des virgules.
@@ -19,14 +13,6 @@ Fil rouge: `TPs/r/data/sales.csv`
 - **Valeur manquante (`NA`)**: absence de valeur (doit être gérée explicitement).
 - **Tibble**: table tidyverse (data frame moderne) retournée par `read_csv()`.
 - **`glimpse()`**: aperçu compact d'une table (fonction du package `{tibble}`).
-
----
-
-## Pourquoi R est conçu pour cette étape
-
-- Lire et manipuler des tables (`data.frame` / tibble) est un usage central en R.
-- Le langage fournit des fonctions natives de parsing/contrôle (`as.*`, `is.*`, `NA`, `stopifnot`).
-- Les packages standard data (ex: `readr`) automatisent l’import tout en restant reproductibles.
 
 ---
 
@@ -44,7 +30,7 @@ On utilise en général deux objets:
 `read_csv()` lit un CSV et renvoie une table (tibble).
 
 ```r
-library(readr)
+pacman::p_load(readr)
 
 sales_raw <- read_csv("TPs/r/data/sales.csv")
 sales_raw
@@ -61,7 +47,7 @@ sales_raw <- read.csv("TPs/r/data/sales.csv", stringsAsFactors = FALSE)
 str(sales_raw)
 ```
 
-Point technique: `stringsAsFactors = FALSE` évite de convertir automatiquement du texte en `factor`.
+Point technique: `stringsAsFactors = FALSE` évite de convertir automatiquement du texte en `factor` (des variables catégorielles).
 
 ---
 
@@ -86,48 +72,79 @@ Problèmes typiques:
 - valeurs manquantes (`is.na`, `sum`, `anyNA`)
 - domaines de valeurs (ex: `units >= 0`, `price >= 0`)
 
-Exemples:
+Bonnes pratiques 
 
 ```r
+# chercher les valeurs manquantes
 required <- c("date", "region", "product", "units", "price")
-missing <- setdiff(required, names(sales_raw))
-if (length(missing) > 0) stop(paste("Colonnes manquantes:", paste(missing, collapse = ", ")))
+# vecteur des noms de colonnes attendues dans le jeu de données
 
-if (anyNA(sales_raw)) message("Attention: valeurs manquantes détectées")
+# la fonction setdiff récupère les valeurs manquantes dans le vect required
+missing <- setdiff(required, names(sales_raw))
+# compare les colonnes requises aux colonnes présentes dans sales_raw
+# retourne les noms de colonnes absentes
+
+if (length(missing) > 0)
+  stop(paste("Colonnes manquantes:", paste(missing, collapse = ", ")))
+# si au moins une colonne requise est absente, arrêt immédiat du script
+# avec un message listant les colonnes manquantes
+
+if (anyNA(sales_raw))
+  message("Attention: valeurs manquantes détectées")
+# teste l’ensemble du data frame
+# retourne TRUE s’il existe au moins un NA, quelle que soit la colonne ou la ligne
+
+# remarque pour NA 
+sapply(df, anyNA)   # détection des NA par colonne
+# retourne un vecteur logique indiquant si chaque colonne contient au moins un NA
+
+sapply(df, 1, anyNA) # par ligne
+# intention : détecter les NA par ligne
+# en pratique, sapply n’est pas adapté ici pour parcourir les lignes
+# apply(df, 1, anyNA) est la forme correcte pour un test ligne par ligne
 ```
 
 ---
 
-## Parser une date
+## Parser une date 
 
-Option A (base R):
+On force le bon type 
 
 ```r
 sales_raw$date <- as.Date(sales_raw$date)
 ```
 
-Option B (lubridate):
+---
+
+## Types numériques
+
+Certaines colonnes doivent être numériques pour pouvoir calculer.
+
+- `units` : quantités
+- `price` : prix
+
+On force explicitement le type numérique.
 
 ```r
-library(lubridate)
-sales_raw$date <- ymd(sales_raw$date)
+sales_raw$units <- as.numeric(sales_raw$units)
+sales_raw$price <- as.numeric(sales_raw$price)
 ```
+
+👉 Si une valeur ne peut pas être convertie, elle devient `NA`.
 
 ---
 
-## Types numériques (pièges fréquents)
+### Idée clé
 
-- `units` doit être numérique (souvent entier)
-- `price` doit être numérique (double)
-- les conversions silencieuses peuvent créer des `NA`
+> Mieux vaut forcer les types explicitement que laisser R deviner.
 
-```r
-sales_raw$units <- suppressWarnings(as.integer(sales_raw$units))
-sales_raw$price <- suppressWarnings(as.numeric(sales_raw$price))
+---
 
-stopifnot(!any(is.na(sales_raw$units)))
-stopifnot(!any(is.na(sales_raw$price)))
-```
+### À retenir pour la suite
+
+- les calculs nécessitent des colonnes numériques
+- les problèmes de type sont une source fréquente d’erreurs
+- la validation détaillée sera vue plus tard
 
 ---
 
@@ -141,7 +158,7 @@ Définition: `revenue` est une **variable dérivée**, calculée à partir d'aut
 
 ---
 
-## Sauvegarder une version “processed”
+## Sauvegarder une version "processed"
 
 Objectif: séparer données sources (`raw`) et données prêtes à analyser (`processed`).
 
@@ -167,9 +184,3 @@ anyNA(sales_raw)
 ## Exercice (import)
 
 Sujet: `Exercices/108_import_cleaning.md`
-
-Objectifs:
-- importer `sales.csv` (base R puis option `readr`)
-- convertir `date`, `units`, `price` et gérer les erreurs de parsing
-- créer `revenue` et vérifier les invariants (`units >= 0`, `price >= 0`)
-- écrire une version `data/processed/sales_clean.csv`

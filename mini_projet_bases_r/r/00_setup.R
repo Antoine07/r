@@ -1,15 +1,19 @@
+# 00_setup.R
 # Setup minimal du mini-projet
+# - chargement des packages
+# - définition des chemins
+# - création des dossiers nécessaires
 
-rproj_files <- list.files(pattern = "\\.Rproj$")
-stopifnot(length(rproj_files) >= 1)
+# Chargement explicite des dépendances
+library(dplyr)
+library(readr)
+library(ggplot2)
 
-paths <- list(
-  raw_sales = "data/raw/sales.csv",
-  out_tables = "output/tables",
-  out_figures = "output/figures"
-)
+# Définition des chemins (relatifs à la racine du projet)
+data_raw_dir <- "data/raw"
+data_processed_dir <- "data/processed"
+output_tables_dir <- "output/tables"
+output_figures_dir <- "output/figures"
 
-stopifnot(file.exists(paths$raw_sales))
-
-dir.create(paths$out_tables, recursive = TRUE, showWarnings = FALSE)
-dir.create(paths$out_figures, recursive = TRUE, showWarnings = FALSE)
+# Création des dossiers si absents
+dir.create(processed, showWarnings = FALSE, recursive = TRUE)
