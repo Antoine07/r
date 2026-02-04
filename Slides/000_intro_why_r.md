@@ -40,19 +40,6 @@ OS : macOS
 - **OS** : Windows, macOS ou Linux (R est agnostique, ne dépend pas du matériel)
 - **Écran** : Full HD minimum
 
---- 
-
-✅ Suffisant pour :
-
-- `ggplot2`
-- `dplyr`, `tidyverse`
-- petits à moyens jeux de données (quelques millions de lignes)
-
-⚠️ Limite rapide si :
-
-- gros data frames en mémoire
-- plusieurs objets lourds en même temps
-
 ---
 
 ## Configuration recommandée (confort + long terme)
@@ -63,6 +50,8 @@ OS : macOS
 - **RAM** : **16 Go** (idéal pour R)
 - **Stockage** : SSD NVMe, 512 Go
 - **Écran** : 2 écrans ou 1 écran large (gain énorme de productivité)
+
+---
 
 Confortable pour :
 
@@ -77,40 +66,6 @@ Confortable pour :
 
 ---
 
-## Configuration "data lourde" (cas spécifiques)
-
-👉 À envisager seulement si vous savez pourquoi.
-
-- **RAM** : 32 Go ou plus
-- **CPU** : beaucoup de cœurs si parallélisation (`future`, `parallel`)
-- **Stockage** : SSD rapide pour cache / temporaires
-
-Utile si :
-
-- données > plusieurs Go
-- simulations
-- modélisation intensive
-- bio-stats, économétrie lourde
-
----
-
-## GPU : utile ou pas ?
-
-👉 **En R : presque jamais indispensable**
-
-- `ggplot2` → CPU
-- `dplyr` → CPU + RAM
-- GPU utile uniquement si :
-
-  - deep learning spécifique
-  - intégration avec Python / CUDA
-
->Pour un usage R "classique" : **inutile d'investir**.
-
----
-
-## Point clé souvent ignoré
-
 ### RAM > CPU > GPU
 
 Pourquoi ?
@@ -121,41 +76,6 @@ Pourquoi ?
 
 ---
 
-## Recommandation claire (personnelle)
-
-Si je devais conseiller **une seule config perso** pour travailler sereinement avec R :
-
-> **CPU 6–8 cœurs + 16 Go de RAM + SSD NVMe**
-
-C'est stable, durable, et largement suffisant pour l'analyse moderne.
-
----
-
-## Astuce finale (plus important que le matériel)
-
-Même avec une grosse machine :
-
-- nettoyer les objets inutiles
-- éviter les copies inutiles
-- utiliser `rm()` et `gc()` quand nécessaire
-- penser "taille mémoire" dès le départ
-
-Si vous voulez, je peux :
-
-- vous aider à **dimensionner selon vos datasets**
-- comparer **portable vs desktop**
-- ou proposer une config **low budget optimisée**
-
-
----
-
-# R et Python en analyse de données
-
-R est conçu dès l'origine pour la statistique et l'analyse de données, avec un fort accent sur la visualisation.
-Python est un langage généraliste, pensé pour programmer des applications avant d'être utilisé pour l'analyse de données.
-Aujourd'hui, R est souvent privilégié pour l'exploration et les graphiques, tandis que Python est très présent en production et en machine learning.
-
---- 
 
 # Introduction — Pourquoi R ?
 
