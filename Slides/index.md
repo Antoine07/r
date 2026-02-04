@@ -61,7 +61,6 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 - [Organiser un projet R](https://antoine07.github.io/r/107_project_structure.html)
 - [`TP Taxi` (introduction)](https://github.com/Antoine07/r/tp_final.md)
 
-
 ---
 
 ## Hors scop sans doute

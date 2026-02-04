@@ -12,8 +12,6 @@ header: "[index](https://antoine07.github.io/r)"
 
 - listes
 - matrices
-- arrays
-- attributes
 
 ---
 
