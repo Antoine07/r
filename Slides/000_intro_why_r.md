@@ -64,12 +64,14 @@ OS : macOS
 - **Stockage** : SSD NVMe, 512 Go
 - **Écran** : 2 écrans ou 1 écran large (gain énorme de productivité)
 
-✅ Confortable pour :
+Confortable pour :
 
 - gros data frames
 - jointures complexes
 - `ggplot2` lourds
 - RStudio / Positron + navigateur + PDF ouverts
+
+---
 
 💡 En R, **la RAM est plus importante que le CPU**.
 
