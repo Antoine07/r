@@ -127,8 +127,6 @@ Exemple de chaîne typique:
 
 - Analyse de campagne: coûts, conversions, ROI, segments
 - A/B testing: comparaison de taux de conversion entre variantes
-- Cohortes: évolution d'un indicateur par date d'acquisition
-- Scoring simple (régression/logistique) pour prioriser des leads
 
 ---
 
@@ -144,9 +142,7 @@ Exemple de chaîne typique:
 ## Exemples de projets métiers (ops / produit / data)
 
 - Qualité de données: contrôles, alertes, tableaux de validation
-- Suivi produit: funnels, rétention, churn (cohortes)
 - Support/qualité: analyse de tickets (catégories, volumes)
-- Supply: volumes, délais, performance par site
 
 ---
 
