@@ -6,28 +6,35 @@ class: lead
 header: "[index](https://antoine07.github.io/r)"
 ---
 
-# Syntaxe R 
+# Syntaxe R — les bases pour démarrer
 
-## Affectation: `<-`
+Objectif : savoir **lire**, **écrire** et **exécuter** du code R simple.
 
+---
+
+##  Créer des objets (affectation)
 
 ```r
 x <- 10
 y <- x + 5
 ```
 
-`<-` est la convention R (même si `=` fonctionne souvent).
+- `<-` associe une valeur à un nom
+- R travaille avec des **objets**
+- on réutilise les objets dans les calculs
+
+📌 Convention R : `<-` (même si `=` fonctionne parfois)
 
 ---
 
-## Types de base
+## Les types de base
 
-- `numeric` (double)
-- `integer`
-- `character` (texte)
-- `logical` (`TRUE`/`FALSE`)
+Toute valeur a un **type**.
 
-Tester:
+- `numeric` : nombres
+- `integer` : entiers
+- `character` : texte
+- `logical` : vrai / faux
 
 ```r
 typeof(3.14)
@@ -36,9 +43,13 @@ typeof("hello")
 typeof(TRUE)
 ```
 
+📌 Le type détermine ce qu’on peut faire avec une valeur.
+
 ---
 
-## Vecteurs 
+## 3. Vecteurs : la structure centrale de R
+
+Un vecteur = plusieurs valeurs du **même type**.
 
 ```r
 v <- c(10, 20, 30)
@@ -47,40 +58,61 @@ sum(v)
 mean(v)
 ```
 
-Un vecteur est homogène (un seul type, après coercition éventuelle).
-
-coercition = convertion de type automatique
+📌 R est conçu pour travailler sur des **collections de valeurs**.
 
 ---
 
-## Indexation (1-based)
+## 4. Coercition (conversion automatique)
 
 ```r
-v[1]     # premier
-v[2:3]   # plage d'index
-v[-1]    # tout sauf le 1er
-rev(v)   # renvoie le vecteur inversé
+c(1, "a", TRUE)
 ```
 
-Filtrage logique:
+- R force les valeurs vers un type commun
+- un vecteur est **toujours homogène**
+
+📌 Le typage existe, mais il est souvent implicite.
+
+---
+
+## Indexation (R commence à 1)
+
+```r
+v[1]     # premier élément
+v[2:3]   # sous-vecteur
+v[-1]    # exclusion
+rev(v)   # ordre inversé
+```
+
+📌 L’indexation permet d’extraire des sous-ensembles.
+
+---
+
+#-  Sélection par condition (logique)
 
 ```r
 v[v >= 20]
 ```
 
+- on garde uniquement les valeurs qui vérifient la condition
+- base de l’analyse de données
+
 ---
 
-## `NA` (valeurs manquantes)
+##  Valeurs manquantes (`NA`)
 
 ```r
 x <- c(1, 2, NA, 4)
-mean(x)              # NA
-mean(x, na.rm = TRUE)
+
+mean(x)                # NA
+mean(x, na.rm = TRUE)  # ignore les NA
 ```
+
+📌 Les données réelles contiennent presque toujours des `NA`.
 
 ---
 
-## Fonctions: structure
+## 8. Fonctions : regrouper des instructions
 
 ```r
 add <- function(a, b) {
@@ -90,24 +122,31 @@ add <- function(a, b) {
 add(2, 3)
 ```
 
+- une fonction prend des arguments
+- renvoie un résultat
+- évite de répéter du code
+
 ---
 
-## Conditions & boucles (minimum)
+## 9. Décider et répéter (minimum vital)
+
+### Condition
 
 ```r
 if (x > 0) "positive" else "negative"
 ```
 
-Boucle `for`:
+### Boucle
 
 ```r
 total <- 0
-for (i in 1:5) total <- total + i
+
+for (i in 1:5) {
+  total <- total + i
+}
+
 total
 ```
 
----
+📌 Présenté ici pour la culture générale.
 
-## Exercice les bases
-
-`Exercices/102_r_basic_syntax.md`
