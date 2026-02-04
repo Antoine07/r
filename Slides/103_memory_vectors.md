@@ -178,8 +178,8 @@ is.na(x)
 sum(is.na(x))
 mean(x, na.rm = TRUE)
 
-0/0   # NaN
-1/0   # Inf
+0/0   # NaN c'est une indéterminé au sens maths
+1/0   # Inf c'est une limite 
 ```
 
 ---
@@ -188,20 +188,25 @@ mean(x, na.rm = TRUE)
 
 ```r
 v <- c(5, 9, 2, 9, 1)
-v[1]
-v[2:4]
-v[-1]
-v[v >= 5]
+v[1] # accès à un élément
+v[2:4] # slicing 
+v[-1] # exclure la position 1, etc
+v[v >= 5] # filtre logique
 ```
 
 ---
 
 ## Indexation par noms
 
+On peut définir des noms dans un vecteur atomique, attention ce ne sont pas des clés, mais des labels.
+
 ```r
 scores <- c(alice = 12, bob = 9, chris = 16)
 scores["bob"]
 names(scores)
+
+x <- c(a = 1, a = 2) # vous pouvez faire ça ... 
+x["a"] # n'écrase rien ... 
 ```
 
 ---
@@ -243,6 +248,8 @@ tracemem(x)
 
 y <- x
 y[1] <- 99
+
+sum( !(y == x) ) # si plus grand que 1 ... 
 ```
 
 👉 tracemem() permet de voir quand un objet est copié en mémoire.
@@ -258,7 +265,7 @@ Par rapport à l'exemple précédent R se dit :
 si je modifie, je vais casser x."
 
 👉 Donc R :
-- copie l’objet
+- copie l'objet
 - donne la copie à y
 - modifie la copie
 - laisse x intact
@@ -269,9 +276,9 @@ si je modifie, je vais casser x."
 
 Quand un vecteur grandit, R doit généralement:
 
-1) allouer un nouveau bloc mémoire
-2) copier les anciennes valeurs
-3) ajouter la nouvelle valeur
+- allouer un nouveau bloc mémoire
+- copier les anciennes valeurs
+- ajouter la nouvelle valeur
 
 Dans une boucle, cela peut provoquer une réallocation + copie à chaque itération.
 
@@ -287,7 +294,7 @@ for (i in 1:100000) x <- c(x, i)
 complexité ≈ O(n²)
 
 - nouvelle allocation
-- copie complète de l’ancien vecteur
+- copie complète de l'ancien vecteur
 
 ```r
 x <- numeric(0)
@@ -314,7 +321,7 @@ Alternative vectorisée:
 # stocké de façon paresseuse
 x <- 1:100000
 
-# mauvaise pratique force le passage en double ×2 mémoire
+# mauvaise pratique, si pas nécessaire, force le passage en double ×2 mémoire
 x <- as.numeric(1:100000)
 ```
 
@@ -322,6 +329,17 @@ x <- as.numeric(1:100000)
 
 >Règle d'or à retenir :
 >Si ce que vous voulez est une séquence régulière, utilisez toujours `:` ou `seq_*()`.
+
+---
+
+Dans les cas ci-dessous la conversion (`coercition`) se fait automatiquement 
+
+```r
+mean(x)
+sd(x)
+x / 3
+log(x)
+```
 
 ---
 
