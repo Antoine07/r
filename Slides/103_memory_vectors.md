@@ -54,6 +54,31 @@ Repères (ordre de grandeur):
 x <- rep(1, 1e6)
 object.size(x)
 ```
+---
+
+# Inf 
+
+```r
+.Machine$double.xmax
+# normalement la valeur qui suit est Inf
+1.8*10^308 
+```
+
+On peut continuer à faire des calculs si on est en dessous de cette valeur, pour information le nombre d'atomes dans l'Univers est estimé à `≈ 10⁸⁰` ... 
+
+---
+
+# Limite 
+
+👉 Au-delà de ~15–16 chiffres :
+- les entiers ne sont plus exacts
+- les petits écarts disparaissent
+
+```r
+1e16 + 1 == 1e16 # TRUE
+1e10 + 1 == 1e10 # FALSE
+
+```
 
 ---
 

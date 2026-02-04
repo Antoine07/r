@@ -14,6 +14,139 @@ En parallèle, Python, créé en 1991, se développe comme langage généraliste
 
 ---
 
+>Pour un usage R "classique" : **inutile d'investir**.
+
+---
+ # Ma machine
+
+Machine : Mac Apple Silicon
+SoC : Apple M4 Pro
+RAM : 24 Go unifiée
+
+Stockage : SSD Apple (très rapide)
+OS : macOS
+
+👉 C'est une machine haut de gamme orientée calcul et data. `Elle est sur-dimensionnée`
+
+---
+
+## Configuration minimale (fonctionne sans frustration)
+
+👉 Adaptée à l'enseignement, aux projets modestes, aux datasets moyens.
+
+- **CPU** : 4 cœurs (Intel i5 / Ryzen 5 équivalent)
+- **RAM** : **8 Go** (strict minimum acceptable)
+- **Stockage** : **SSD** (obligatoire aujourd'hui), 256 Go
+- **OS** : Windows, macOS ou Linux (R est agnostique, ne dépend pas du matériel)
+- **Écran** : Full HD minimum
+
+--- 
+
+✅ Suffisant pour :
+
+- `ggplot2`
+- `dplyr`, `tidyverse`
+- petits à moyens jeux de données (quelques millions de lignes)
+
+⚠️ Limite rapide si :
+
+- gros data frames en mémoire
+- plusieurs objets lourds en même temps
+
+---
+
+## Configuration recommandée (confort + long terme)
+
+👉 C'est **le meilleur compromis** pour 90 % des usages R.
+
+- **CPU** : 6–8 cœurs (Ryzen 7 / Intel i7)
+- **RAM** : **16 Go** (idéal pour R)
+- **Stockage** : SSD NVMe, 512 Go
+- **Écran** : 2 écrans ou 1 écran large (gain énorme de productivité)
+
+✅ Confortable pour :
+
+- gros data frames
+- jointures complexes
+- `ggplot2` lourds
+- RStudio / Positron + navigateur + PDF ouverts
+
+💡 En R, **la RAM est plus importante que le CPU**.
+
+---
+
+## Configuration "data lourde" (cas spécifiques)
+
+👉 À envisager seulement si vous savez pourquoi.
+
+- **RAM** : 32 Go ou plus
+- **CPU** : beaucoup de cœurs si parallélisation (`future`, `parallel`)
+- **Stockage** : SSD rapide pour cache / temporaires
+
+Utile si :
+
+- données > plusieurs Go
+- simulations
+- modélisation intensive
+- bio-stats, économétrie lourde
+
+---
+
+## GPU : utile ou pas ?
+
+👉 **En R : presque jamais indispensable**
+
+- `ggplot2` → CPU
+- `dplyr` → CPU + RAM
+- GPU utile uniquement si :
+
+  - deep learning spécifique
+  - intégration avec Python / CUDA
+
+>Pour un usage R "classique" : **inutile d'investir**.
+
+---
+
+## Point clé souvent ignoré
+
+### RAM > CPU > GPU
+
+Pourquoi ?
+
+- R charge les données **en mémoire**
+- copier un data frame = consommation RAM immédiate
+- swap disque = lenteur dramatique
+
+---
+
+## Recommandation claire (personnelle)
+
+Si je devais conseiller **une seule config perso** pour travailler sereinement avec R :
+
+> **CPU 6–8 cœurs + 16 Go de RAM + SSD NVMe**
+
+C'est stable, durable, et largement suffisant pour l'analyse moderne.
+
+---
+
+## Astuce finale (plus important que le matériel)
+
+Même avec une grosse machine :
+
+- nettoyer les objets inutiles
+- éviter les copies inutiles
+- utiliser `rm()` et `gc()` quand nécessaire
+- penser "taille mémoire" dès le départ
+
+Si vous voulez, je peux :
+
+- vous aider à **dimensionner selon vos datasets**
+- comparer **portable vs desktop**
+- ou proposer une config **low budget optimisée**
+
+
+---
+
 # R et Python en analyse de données
 
 R est conçu dès l'origine pour la statistique et l'analyse de données, avec un fort accent sur la visualisation.

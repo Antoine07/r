@@ -43,12 +43,16 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 
 ---
 
-## Chapitres — Statistiques & reporting - (si le temps le permet)
+## Chapitres — Statistiques & ggplot2 
 
+- [`ggplot2` (introduction)](https://antoine07.github.io/r/111_stats_graphs.html)
 
 
 ---
 
-## Annexes
+## TP final 
 
+à faire par équipe et à présenter
+
+- [`TP Taxi` (introduction)](https://github.com/Antoine07/r/tp_final.md)
 

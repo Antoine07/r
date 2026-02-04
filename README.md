@@ -12,7 +12,7 @@ rm(list = ls())
 On ne l'utilisera pas dans un projet structuré avec `renv`, mais il est pratique dans un script R pour commencer.
 
 ```r
-# pacman est un package qui permet de gérer facilement les packages 
+# pacman est un package qui permet de gérer facilement les packages - à utiliser quand démo pas en projet.
 if (!require("pacman", quietly = TRUE)) {
   install.packages("pacman")
 }
