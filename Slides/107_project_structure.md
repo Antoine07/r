@@ -47,24 +47,20 @@ La racine du projet contient :
 
 ---
 
-## Structure minimale recommandée
+## Structure minimale recommandée - voir dossier starter
 
 ```text
 my_project/
   my_project.Rproj
   README.md
   .gitignore
-
   data/
     raw/          # données sources (non modifiées)
     processed/    # données dérivées (reconstruites)
-
   r/              # scripts R du projet
-
   output/
     tables/       # tables produites
     figures/      # graphiques produits
-
   reports/        # rapports (Quarto / R Markdown)
 ```
 
@@ -206,3 +202,119 @@ source("r/run_all.R")
 - une reconstruction possible à tout moment
 
 C'est la base d'un projet R propre et professionnel.
+
+---
+
+### Projet pour le cours 
+
+Récupérez les supports de cours en les clonants ou en les téléchargeants. Puis suivez les étapes ci-après pour installer votre projet.
+
+- [`mini projet`](https://github.com/Antoine07/r/starter/)
+
+
+---
+
+## Étape 0 — Ouvrir le projet
+
+👉 Double-cliquez sur le fichier **`.Rproj`** du projet.
+
+⚠️ Ne lancez pas R "tout seul".
+
+---
+
+## Étape 1 — Initialiser `renv` (une seule fois)
+
+👉 Dans la **console R** :
+
+```r
+renv::init()
+```
+
+Ce que ça fait :
+
+- crée le dossier `renv/`
+- crée le fichier `renv.lock`
+- isole l'environnement du projet
+
+---
+
+## Étape 2 — Installer les packages nécessaires
+
+👉 Toujours dans la **console R**, nous avons besoin essentiellement que du package suivant `tidyverse`
+
+```r
+# dplyr, ggplot2, readr, tibble
+install.packages("tidyverse")
+```
+
+(Si besoin : `"lubridate"` aussi)
+
+---
+
+## Étape 3 — Figer l'environnement
+
+👉 Toujours dans la **console R** :
+
+```r
+renv::snapshot()
+```
+
+Ce que ça fait :
+
+- enregistre les versions exactes des packages
+- met à jour `renv.lock`
+
+---
+
+## Étape 4 — Fermer puis rouvrir le projet (recommandé)
+
+👉 Fermez RStudio
+👉 Rouvrez le fichier `.Rproj`
+
+📌 Pas obligatoire, mais conseillé pour repartir proprement.
+
+---
+
+## Étape 5 — Lancer le projet
+
+👉 Ouvrez le script `99_run_all.R`
+👉 Cliquez sur **Run** (ou `source()`)
+
+---
+
+## Ce que feront les étudiants (plus tard)
+
+👉 Après avoir ouvert le projet :
+
+```r
+renv::restore()
+```
+
+Et c'est tout.
+
+---
+
+## Ce qu'il ne faut PAS faire
+
+❌ écrire `install.packages()` dans un script
+❌ modifier `renv.lock` à la main
+❌ créer `renv/` manuellement
+
+---
+
+
+## Phrase clé à retenir
+
+> `renv` garantit que tout le monde travaille avec le même R.
+
+---
+
+## Résumé en 5 commandes
+
+```r
+renv::init()
+install.packages("tidyverse")
+renv::snapshot() # met à jour les dépendances
+# (fermer / rouvrir)
+renv::restore()   # si on doit restore 
+```

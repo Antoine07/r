@@ -1,0 +1,15 @@
+# R / RStudio
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+
+# macOS
+.DS_Store
+
+# Reconstruisible
+output/
+
+renv/
+# à versionner pour un projet 
+renv.lock

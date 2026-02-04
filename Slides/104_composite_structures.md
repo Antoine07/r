@@ -64,6 +64,19 @@ Point technique: `lapply()` renvoie toujours une liste.
 
 ---
 
+# Parcourir une liste de vecteurs
+
+```r
+values <- list(1:3, 10:12, 100:102) # liste de listes, 3 éléments
+for (v in values) {        # 1ère boucle : la liste
+  for (x in v) {           # 2ème boucle : le vecteur
+    print(x)
+  }
+}
+```
+
+---
+
 ## Matrices — définition
 
 Une **matrice** est un vecteur atomique + un attribut `dim` (2D).
@@ -140,6 +153,36 @@ colSums(A) # somme des colonnes
 apply(A, 1, max) # max des lignes  1 = ligne
 apply(A, 2, max)  # max des colonnes 2 = colonne
 ```
+
+---
+
+# Inverser une matrice
+
+```r
+A <- matrix(c(1, 2,
+              3, 4),
+            nrow = 2, byrow = TRUE)
+
+A_inv <- solve(A)
+A %*% A_inv
+```
+
+---
+
+# Résoudre un système `Ax=b`
+
+
+```r
+A <- matrix(c(3, 1,
+              1, 2),
+            nrow = 2, byrow = TRUE)
+
+b <- c(9, 8)
+```
+
+- Méthode naïve à éviter : `x <- solve(A) %*% b`
+- Méthode efficace : `x <- solve(A, b)`
+- Vérifier : `A %*% x`
 
 ---
 

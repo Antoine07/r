@@ -1,6 +1,3 @@
-https://www.youtube.com/watch?v=AG4iFVJWvoE
-
-
 ## reset RStudio 
 
 ```r
@@ -37,3 +34,7 @@ args(read_csv)
 # Lister tous les paramètres et leurs valeurs par défaut
 formals(read_csv)
 ```
+
+## Supports de cours 
+
+https://www.youtube.com/watch?v=AG4iFVJWvoE
