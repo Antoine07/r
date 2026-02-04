@@ -6,6 +6,22 @@ class: lead
 header: "[index](https://antoine07.github.io/r)"
 ---
 
+# Historique 
+
+Dans les années 1970, le langage S est développé aux Bell Labs pour la statistique.
+En 1993, R est créé par Ross Ihaka et Robert Gentleman comme version libre de S, dédiée à l'analyse de données.
+En parallèle, Python, créé en 1991, se développe comme langage généraliste et sera ensuite largement utilisé en data science.
+
+---
+
+# R et Python en analyse de données
+
+R est conçu dès l'origine pour la statistique et l'analyse de données, avec un fort accent sur la visualisation.
+Python est un langage généraliste, pensé pour programmer des applications avant d'être utilisé pour l'analyse de données.
+Aujourd'hui, R est souvent privilégié pour l'exploration et les graphiques, tandis que Python est très présent en production et en machine learning.
+
+--- 
+
 # Introduction — Pourquoi R ?
 
 Contexte d'utilisation, atouts, et exemples de projets réalisés avec R.
@@ -31,7 +47,7 @@ Contexte d'utilisation, atouts, et exemples de projets réalisés avec R.
 
 ## Avantages de R (pratiques)
 
-- Expressif pour la donnée tabulaire (data frames)
+- Expressif pour la donnée tabulaire (data frames, mais on utilisera `tibble`)
 - Écosystème riche (ex: `tidyverse`, `ggplot2`)
 - Très bon support statistique (fonctions natives + packages)
 - Reproductibilité: scripts + projets + rapports
