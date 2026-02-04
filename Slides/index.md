@@ -16,12 +16,11 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 
 ## Chapitres — Introduction & setup
 
-`2h`
+`1h30`
 
 - [Introduction: pourquoi R ?](https://antoine07.github.io/r/000_intro_why_r.html)
 - [Installer R & RStudio](https://antoine07.github.io/r/000_install_r_rstudio.html)
 - [RStudio: workflow](https://antoine07.github.io/r/101_rstudio_workflow.html)
-- [Syntaxe R (programmation de base)](https://antoine07.github.io/r/102_r_basics_syntax.html)
 
 ---
 
@@ -32,6 +31,13 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 - [Sandbox installation](https://antoine07.github.io/r/000_starter_simple.html)
 
 ---
+
+## Syntaxe de base
+
+`30min`
+
+- [Syntaxe R (programmation de base)](https://antoine07.github.io/r/102_r_basics_syntax.html)
+
 
 ## Chapitres — Fondamentaux langage / data
 
