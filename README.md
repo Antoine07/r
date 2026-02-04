@@ -4,19 +4,26 @@
 rm(list = ls())
 ```
 
-## package pacman
+## package indispensable 
 
 On ne l'utilisera pas dans un projet structuré avec `renv`, mais il est pratique dans un script R pour commencer.
 
-```r
-# pacman est un package qui permet de gérer facilement les packages - à utiliser quand démo pas en projet.
-if (!require("pacman", quietly = TRUE)) {
-  install.packages("pacman")
-}
-library(pacman)
+En console 
 
-# installe le package s'il manque le charge s'il est déjà installé
-pacman::p_load(dplyr, ggplot2, readr)
+```bash
+install.packages(c("tibble", "readr", "dplyr"))
+```
+
+Puis chargez les librairies dans R
+
+```r
+library("tibble")
+
+data(iris)
+
+iris |> 
+  as_tibble() |> 
+  summarise(across(where(is.numeric), mean))
 ```
 
 ## fonctions utiles 

@@ -79,29 +79,29 @@ renv<span class="hljs-operator">::</span>snapshot<span class="hljs-punctuation">
 </ol>
 <p>Contenu :</p>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-r">library<span class="hljs-punctuation">(</span>tidyverse<span class="hljs-punctuation">)</span>
-
-<span class="hljs-comment"># Charger les données iris</span>
 data<span class="hljs-punctuation">(</span>iris<span class="hljs-punctuation">)</span>
-
-<span class="hljs-comment"># Afficher les premières lignes</span>
 head<span class="hljs-punctuation">(</span>iris<span class="hljs-punctuation">)</span>
 
-<span class="hljs-comment"># Compter le nombre d&#x27;observations par espèce</span>
 table<span class="hljs-punctuation">(</span>iris<span class="hljs-operator">$</span>Species<span class="hljs-punctuation">)</span>
+
+<span class="hljs-comment"># tester un code avancé</span>
+iris <span class="hljs-operator">|&gt;</span> 
+  as_tibble<span class="hljs-punctuation">(</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">|&gt;</span> 
+  summarise<span class="hljs-punctuation">(</span>across<span class="hljs-punctuation">(</span>where<span class="hljs-punctuation">(</span><span class="hljs-built_in">is.numeric</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span> mean<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span>
 </code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-paginate="true" data-class="lead" data-header="[index](https://antoine07.github.io/r)" data-theme="default" lang="C" class="lead" data-marpit-pagination="8" style="--paginate:true;--class:lead;--header:[index](https://antoine07.github.io/r);--theme:default;" data-marpit-pagination-total="10">
 <header><a href="https://antoine07.github.io/r">index</a></header>
 <h2 id="ex%C3%A9cuter-le-script">Exécuter le script</h2>
 <ol>
-<li>ouvrez <code>01_test.R</code></li>
+<li>ouvrez <code>01_sandbox.R</code></li>
 <li>cliquez sur <strong>Source</strong></li>
 </ol>
 <p>Si un tableau s'affiche → <strong>tout fonctionne</strong> bravo !</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="9" data-paginate="true" data-class="lead" data-header="[index](https://antoine07.github.io/r)" data-theme="default" lang="C" class="lead" data-marpit-pagination="9" style="--paginate:true;--class:lead;--header:[index](https://antoine07.github.io/r);--theme:default;" data-marpit-pagination-total="10">
 <header><a href="https://antoine07.github.io/r">index</a></header>
-<h2 id="%C3%A0-la-premi%C3%A8re-ouverture-%C3%A9tudiants">À la première ouverture (étudiants)</h2>
+<h2 id="%C3%A0-la-premi%C3%A8re-ouverture">À la première ouverture</h2>
 <p>Dans la <strong>console</strong> :</p>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-r">renv<span class="hljs-operator">::</span>restore<span class="hljs-punctuation">(</span><span class="hljs-punctuation">)</span>
 </code></pre>

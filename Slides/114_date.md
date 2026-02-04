@@ -97,11 +97,3 @@ d1 - d0
 
 >Une date est un nombre + une classe.
 
----
-
-## Ce qu'on verra plus tard
-
-- heures (`POSIXct`)
-- fuseaux horaires
-- `lubridate`
-

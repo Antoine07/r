@@ -83,6 +83,12 @@ sessionInfo()
 
 ---
 
+## Une version en ligne existe
+
+[RStudio R posit](https://posit.cloud)
+
+---
+
 ## Installer des packages
 
 ```r

@@ -29,7 +29,7 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 
 `30min`
 
-- [Sandbox installation](https://github.com/Antoine07/r/Slides/000_starter_simple.md)
+- [Sandbox installation](https://antoine07.github.io/r/000_starter_simple.html)
 
 ---
 

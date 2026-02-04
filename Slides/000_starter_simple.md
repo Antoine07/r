@@ -86,29 +86,29 @@ Contenu :
 
 ```r
 library(tidyverse)
-
-# Charger les données iris
 data(iris)
-
-# Afficher les premières lignes
 head(iris)
 
-# Compter le nombre d'observations par espèce
 table(iris$Species)
+
+# tester un code avancé
+iris |> 
+  as_tibble() |> 
+  summarise(across(where(is.numeric), mean))
 ```
 
 ---
 
 ## Exécuter le script
 
-1. ouvrez `01_test.R`
+1. ouvrez `01_sandbox.R`
 1. cliquez sur **Source**
 
 Si un tableau s'affiche → **tout fonctionne** bravo !
 
 ---
 
-## À la première ouverture (étudiants)
+## À la première ouverture 
 
 Dans la **console** :
 

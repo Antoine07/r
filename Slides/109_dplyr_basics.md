@@ -124,3 +124,54 @@ sales |>
   count(region, product, sort = TRUE)
 ```
 
+---
+
+## Appliquer un calcul à plusieurs colonnes : `across()`
+
+Quand on agrège des données, on veut souvent appliquer **le même calcul à plusieurs colonnes**  
+(ex : moyenne de toutes les variables numériques).
+
+`dplyr` fournit pour cela la fonction **`across()`**, utilisée dans `summarise()` ou `mutate()`.
+
+```r
+summarise(
+  across(colonnes, fonction)
+)
+```
+
+Lecture :
+
+> *Pour chaque colonne sélectionnée, appliquer cette fonction.*
+
+---
+
+### Sélection automatique de colonnes : `where()`
+
+`where()` permet de sélectionner des colonnes **selon leur type** ou une condition.
+
+Exemple :
+
+```r
+summarise(
+  across(where(is.numeric), mean)
+)
+```
+
+Interprétation :
+
+- `where(is.numeric)` → toutes les colonnes numériques
+- `mean` → fonction appliquée à chacune
+- une colonne de sortie par variable
+
+---
+
+### Exemple complet
+
+```r
+iris |>
+  summarise(
+    across(where(is.numeric), mean)
+  )
+```
+
+➡️ Calcule la moyenne de toutes les variables numériques du jeu de données.
