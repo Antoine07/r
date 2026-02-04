@@ -43,8 +43,8 @@ Important:
 
 ## Windows
 
-1) Installer **R** (CRAN)
-2) Installer **RStudio Desktop**
+- Installer **R** (CRAN)
+- Installer **RStudio Desktop**
 
 Après installation:
 - ouvrir RStudio
@@ -58,8 +58,8 @@ version
 
 ## macOS
 
-1) Installer **R** (package macOS)
-2) Installer **RStudio Desktop**
+- Installer **R** (package macOS)
+- Installer **RStudio Desktop**
 
 Test:
 
