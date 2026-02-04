@@ -14,12 +14,6 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 
 ---
 
-## Plan
-
-- Plan du cours: [plan.html](https://antoine07.github.io/r/plan.html)
-
----
-
 ## Chapitres — Introduction & setup
 
 `2h`
