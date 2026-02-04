@@ -22,14 +22,18 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 
 ## Chapitres — Introduction & setup
 
+`2h`
+
 - [Introduction: pourquoi R ?](https://antoine07.github.io/r/000_intro_why_r.html)
 - [Installer R & RStudio](https://antoine07.github.io/r/000_install_r_rstudio.html)
 - [RStudio: workflow](https://antoine07.github.io/r/101_rstudio_workflow.html)
-- [Syntax R](https://antoine07.github.io/r/102_r_basics_syntax.html)
+- [Syntaxe R (programmation de base)](https://antoine07.github.io/r/102_r_basics_syntax.html)
 
 ---
 
 ## Exercice d'application
+
+`30min`
 
 - [Sandbox installation](https://github.com/Antoine07/r/Slides/000_starter_simple.md)
 
@@ -37,28 +41,37 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 
 ## Chapitres — Fondamentaux langage / data
 
+`4h30`
+
 - [Date](https://antoine07.github.io/r/114_date.html)
 - [Modèle mémoire et vecteurs atomiques](https://antoine07.github.io/r/103_memory_vectors.html)
 - [Structures composées (listes, matrices, arrays, attributes)](https://antoine07.github.io/r/104_composite_structures.html)
-- [Structures tabulaires (data.frame, tibble, data.table)](https://antoine07.github.io/r/105_tabular_structures.html)
-- [Cubes (tableaux de contingence)](https://antoine07.github.io/r/105_1_cubes.html)
-- [Syntaxe R (programmation de base)](https://antoine07.github.io/r/102_r_basics_syntax.html)
+- [Structures tabulaires (data.frame, tibble)](https://antoine07.github.io/r/105_tabular_structures.html)
 - [Import & nettoyage](https://antoine07.github.io/r/108_import_cleaning.html)
-- [Manipulation de données (dplyr, tidyr)](https://antoine07.github.io/r/106_data_manipulation.html)
-- [`dplyr` (annexe)](https://antoine07.github.io/r/109_dplyr_basics.html)
-- [`ggplot2` (introduction)](https://antoine07.github.io/r/110_ggplot2_intro.html)
 
 ---
 
-## Chapitres — Statistiques & ggplot2 
+## Chapitres — ggplot2 
 
+`3h30`
+
+- [`ggplot2` (introduction)](https://antoine07.github.io/r/110_ggplot2_intro.html)
 - [`ggplot2` (introduction)](https://antoine07.github.io/r/111_stats_graphs.html)
 
 ---
 
 ## TP final 
 
-à faire par équipe et à présenter
+à faire par équipe et à présenter `2h`
 
 - [Organiser un projet R](https://antoine07.github.io/r/107_project_structure.html)
 - [`TP Taxi` (introduction)](https://github.com/Antoine07/r/tp_final.md)
+
+
+---
+
+## Hors scop sans doute
+
+- [Manipulation de données (dplyr, tidyr)](https://antoine07.github.io/r/106_data_manipulation.html)
+- [`dplyr` (annexe)](https://antoine07.github.io/r/109_dplyr_basics.html)
+- [Cubes (tableaux de contingence)](https://antoine07.github.io/r/105_1_cubes.html)

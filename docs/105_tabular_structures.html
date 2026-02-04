@@ -111,15 +111,11 @@ df<span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="9" data-paginate="true" data-class="lead" data-header="[index](https://antoine07.github.io/r)" data-theme="default" lang="C" class="lead" data-marpit-pagination="9" style="--paginate:true;--class:lead;--header:[index](https://antoine07.github.io/r);--theme:default;" data-marpit-pagination-total="37">
 <header><a href="https://antoine07.github.io/r">index</a></header>
 <h2 id="tibble--d%C3%A9finition"><code>tibble</code> — définition</h2>
-<p>Un <code>tibble</code> est un <strong>data.frame moderne</strong>, fourni par le tidyverse.</p>
+<p>Un <code>tibble</code> est un <strong>data.frame moderne</strong>, fourni par le <code>tidyverse</code>.</p>
 <p>Il respecte le même modèle tabulaire,<br />
 mais avec des <strong>règles plus strictes</strong>.</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-r"><span class="hljs-keyword">if</span> <span class="hljs-punctuation">(</span><span class="hljs-operator">!</span>require<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;pacman&quot;</span><span class="hljs-punctuation">,</span> quietly <span class="hljs-operator">=</span> <span class="hljs-literal">TRUE</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span> <span class="hljs-punctuation">{</span>
-  install.packages<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;pacman&quot;</span><span class="hljs-punctuation">)</span>
-<span class="hljs-punctuation">}</span>
-library<span class="hljs-punctuation">(</span>pacman<span class="hljs-punctuation">)</span>
-
-pacman<span class="hljs-operator">::</span>p_load<span class="hljs-punctuation">(</span>tibble<span class="hljs-punctuation">)</span>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-r"><span class="hljs-comment"># methode de geek à réserver pour la sandbox pas en projet</span>
+library<span class="hljs-punctuation">(</span>tidyverse<span class="hljs-punctuation">)</span>
 
 tb <span class="hljs-operator">&lt;-</span> tibble<span class="hljs-punctuation">(</span>
   region <span class="hljs-operator">=</span> <span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><span class="hljs-string">&quot;North&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;South&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span>
@@ -128,23 +124,24 @@ tb <span class="hljs-operator">&lt;-</span> tibble<span class="hljs-punctuation"
 
 tb
 </code></pre>
+<p>Rappel dans la console <code>install.packages(&quot;tidyverse&quot;)</code> puis <code>renv::snapshot()</code></p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="10" data-paginate="true" data-class="lead" data-header="[index](https://antoine07.github.io/r)" data-theme="default" lang="C" class="lead" data-marpit-pagination="10" style="--paginate:true;--class:lead;--header:[index](https://antoine07.github.io/r);--theme:default;" data-marpit-pagination-total="37">
 <header><a href="https://antoine07.github.io/r">index</a></header>
 <h2 id="tibble--diff%C3%A9rences-cl%C3%A9s-avec-dataframe"><code>tibble</code> — différences clés avec <code>data.frame</code></h2>
 <p>Un <code>tibble</code> :</p>
 <ul>
-<li>ne convertit <strong>jamais</strong> automatiquement le texte en <code>factor</code></li>
-<li>n'utilise <strong>pas de <code>rownames</code></strong></li>
+<li>ne convertit <strong>jamais</strong> automatiquement le texte en <code>factor</code> (variable catégorielle)</li>
+<li>n'utilise <strong>pas de <code>rownames</code></strong> (noms automatiques inutiles)</li>
 <li>affiche un aperçu lisible</li>
-<li>ne tronque pas silencieusement les colonnes</li>
+<li>ne tronque pas silencieusement les colonnes (affiche sans dire que tout n'est pas montré)</li>
 </ul>
 <p><img class="emoji" draggable="false" alt="👉" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f449.svg" data-marp-twemoji=""/> Le comportement est <strong>prévisible et explicite</strong>.</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-paginate="true" data-class="lead" data-header="[index](https://antoine07.github.io/r)" data-theme="default" lang="C" class="lead" data-marpit-pagination="11" style="--paginate:true;--class:lead;--header:[index](https://antoine07.github.io/r);--theme:default;" data-marpit-pagination-total="37">
 <header><a href="https://antoine07.github.io/r">index</a></header>
 <h2 id="exemple--import-de-donn%C3%A9es-avec-readr">Exemple : import de données avec <code>readr</code></h2>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-r">pacman<span class="hljs-operator">::</span>p_load<span class="hljs-punctuation">(</span>readr<span class="hljs-punctuation">)</span>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-r"><span class="hljs-comment"># library(tidyverse) déjà dans ce package</span>
 
 sales <span class="hljs-operator">&lt;-</span> readr<span class="hljs-operator">::</span>read_csv<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;TPs/r/data/sales.csv&quot;</span><span class="hljs-punctuation">)</span>
 str<span class="hljs-punctuation">(</span>sales<span class="hljs-punctuation">)</span>
@@ -190,8 +187,7 @@ str<span class="hljs-punctuation">(</span>sales<span class="hljs-punctuation">)<
 <h2 id="mutate--enrichir-les-donn%C3%A9es"><code>mutate()</code> — enrichir les données</h2>
 <p><code>mutate()</code> sert à <strong>créer ou modifier des colonnes</strong> dans un tibble.</p>
 <p>Chaque calcul est fait <strong>ligne par ligne</strong>.</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-r"><span class="hljs-comment"># mutate est dans cette librarie, on la charge </span>
-pacman<span class="hljs-operator">::</span>p_load<span class="hljs-punctuation">(</span>dplyr<span class="hljs-punctuation">)</span>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-r"><span class="hljs-comment"># dplyr mutate est dans cette librarie, on la charge </span>
 
 sales <span class="hljs-operator">&lt;-</span> sales <span class="hljs-operator">|&gt;</span>
   mutate<span class="hljs-punctuation">(</span>
@@ -246,14 +242,14 @@ sales <span class="hljs-operator">&lt;-</span> sales <span class="hljs-operator"
   <span class="hljs-punctuation">)</span>
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="19" data-marpit-fragments="3" data-paginate="true" data-class="lead" data-header="[index](https://antoine07.github.io/r)" data-theme="default" lang="C" class="lead" data-marpit-pagination="19" style="--paginate:true;--class:lead;--header:[index](https://antoine07.github.io/r);--theme:default;" data-marpit-pagination-total="37">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="19" data-paginate="true" data-class="lead" data-header="[index](https://antoine07.github.io/r)" data-theme="default" lang="C" class="lead" data-marpit-pagination="19" style="--paginate:true;--class:lead;--header:[index](https://antoine07.github.io/r);--theme:default;" data-marpit-pagination-total="37">
 <header><a href="https://antoine07.github.io/r">index</a></header>
 <h3 id="ce-que-r-fait-en-r%C3%A9alit%C3%A9">Ce que R fait en réalité</h3>
 <p>R lit <strong>chaque ligne</strong> et applique la formule :</p>
 <ul>
-<li data-marpit-fragment="1">Ligne 1 → <code>2 * 10 = 20</code></li>
-<li data-marpit-fragment="2">Ligne 2 → <code>5 * 8 = 40</code></li>
-<li data-marpit-fragment="3">Ligne 3 → <code>1 * 20 = 20</code></li>
+<li>Ligne 1 → <code>2 * 10 = 20</code></li>
+<li>Ligne 2 → <code>5 * 8 = 40</code></li>
+<li>Ligne 3 → <code>1 * 20 = 20</code></li>
 </ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="20" data-paginate="true" data-class="lead" data-header="[index](https://antoine07.github.io/r)" data-theme="default" lang="C" class="lead" data-marpit-pagination="20" style="--paginate:true;--class:lead;--header:[index](https://antoine07.github.io/r);--theme:default;" data-marpit-pagination-total="37">
@@ -302,15 +298,15 @@ sales <span class="hljs-operator">&lt;-</span> sales <span class="hljs-operator"
 </ul>
 <p>C'est <strong>vectorisé</strong>, pas une boucle explicite.</p>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="22" data-marpit-fragments="2" data-paginate="true" data-class="lead" data-header="[index](https://antoine07.github.io/r)" data-theme="default" lang="C" class="lead" data-marpit-pagination="22" style="--paginate:true;--class:lead;--header:[index](https://antoine07.github.io/r);--theme:default;" data-marpit-pagination-total="37">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="22" data-paginate="true" data-class="lead" data-header="[index](https://antoine07.github.io/r)" data-theme="default" lang="C" class="lead" data-marpit-pagination="22" style="--paginate:true;--class:lead;--header:[index](https://antoine07.github.io/r);--theme:default;" data-marpit-pagination-total="37">
 <header><a href="https://antoine07.github.io/r">index</a></header>
 <h2 id="%C3%A0-ne-pas-confondre">À ne pas confondre</h2>
 <ul>
-<li data-marpit-fragment="1">
+<li>
 <p><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> <code>mutate()</code> ne résume pas les données<br />
 (ça, c'est <code>summarise()</code>)</p>
 </li>
-<li data-marpit-fragment="2">
+<li>
 <p><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> <code>mutate()</code> ne crée pas une seule valeur<br />
 (une valeur par ligne)</p>
 </li>
@@ -356,8 +352,7 @@ sales <span class="hljs-operator">&lt;-</span> sales <span class="hljs-operator"
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="25" data-paginate="true" data-class="lead" data-header="[index](https://antoine07.github.io/r)" data-theme="default" lang="C" class="lead" data-marpit-pagination="25" style="--paginate:true;--class:lead;--header:[index](https://antoine07.github.io/r);--theme:default;" data-marpit-pagination-total="37">
 <header><a href="https://antoine07.github.io/r">index</a></header>
 <h3 id="code-1">Code</h3>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-r">pacman<span class="hljs-operator">::</span>p_load<span class="hljs-punctuation">(</span>dplyr<span class="hljs-punctuation">)</span>
-
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-r"><span class="hljs-comment"># dplyr </span>
 sales_summary <span class="hljs-operator">&lt;-</span> sales <span class="hljs-operator">|&gt;</span>
   summarise<span class="hljs-punctuation">(</span>
     total_units   <span class="hljs-operator">=</span> <span class="hljs-built_in">sum</span><span class="hljs-punctuation">(</span>units<span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span>
@@ -366,14 +361,14 @@ sales_summary <span class="hljs-operator">&lt;-</span> sales <span class="hljs-o
   <span class="hljs-punctuation">)</span>
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="26" data-marpit-fragments="3" data-paginate="true" data-class="lead" data-header="[index](https://antoine07.github.io/r)" data-theme="default" lang="C" class="lead" data-marpit-pagination="26" style="--paginate:true;--class:lead;--header:[index](https://antoine07.github.io/r);--theme:default;" data-marpit-pagination-total="37">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="26" data-paginate="true" data-class="lead" data-header="[index](https://antoine07.github.io/r)" data-theme="default" lang="C" class="lead" data-marpit-pagination="26" style="--paginate:true;--class:lead;--header:[index](https://antoine07.github.io/r);--theme:default;" data-marpit-pagination-total="37">
 <header><a href="https://antoine07.github.io/r">index</a></header>
 <h2 id="ce-que-r-fait-en-r%C3%A9alit%C3%A9-1">Ce que R fait en réalité</h2>
 <p>Il ne travaille <strong>plus ligne par ligne</strong> :</p>
 <ul>
-<li data-marpit-fragment="1"><code>sum(units)</code> → 2 + 5 + 1 = <strong>8</strong></li>
-<li data-marpit-fragment="2"><code>sum(units * price)</code> → 20 + 40 + 20 = <strong>80</strong></li>
-<li data-marpit-fragment="3"><code>mean(price)</code> → (10 + 8 + 20) / 3 = <strong>12.67</strong></li>
+<li><code>sum(units)</code> → 2 + 5 + 1 = <strong>8</strong></li>
+<li><code>sum(units * price)</code> → 20 + 40 + 20 = <strong>80</strong></li>
+<li><code>mean(price)</code> → (10 + 8 + 20) / 3 = <strong>12.67</strong></li>
 </ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="27" data-paginate="true" data-class="lead" data-header="[index](https://antoine07.github.io/r)" data-theme="default" lang="C" class="lead" data-marpit-pagination="27" style="--paginate:true;--class:lead;--header:[index](https://antoine07.github.io/r);--theme:default;" data-marpit-pagination-total="37">
@@ -407,12 +402,12 @@ sales_summary <span class="hljs-operator">&lt;-</span> sales <span class="hljs-o
 <li>information <strong>synthétique</strong></li>
 </ul>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="29" data-marpit-fragments="2" data-paginate="true" data-class="lead" data-header="[index](https://antoine07.github.io/r)" data-theme="default" lang="C" class="lead" data-marpit-pagination="29" style="--paginate:true;--class:lead;--header:[index](https://antoine07.github.io/r);--theme:default;" data-marpit-pagination-total="37">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="29" data-paginate="true" data-class="lead" data-header="[index](https://antoine07.github.io/r)" data-theme="default" lang="C" class="lead" data-marpit-pagination="29" style="--paginate:true;--class:lead;--header:[index](https://antoine07.github.io/r);--theme:default;" data-marpit-pagination-total="37">
 <header><a href="https://antoine07.github.io/r">index</a></header>
 <h2 id="%C3%A0-ne-pas-confondre-1">À ne pas confondre</h2>
 <ul>
-<li data-marpit-fragment="1"><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> <code>summarise()</code> ne crée pas une colonne par ligne</li>
-<li data-marpit-fragment="2"><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> <code>summarise()</code> ne conserve pas le détail</li>
+<li><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> <code>summarise()</code> ne crée pas une colonne par ligne</li>
+<li><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> <code>summarise()</code> ne conserve pas le détail</li>
 </ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="30" data-paginate="true" data-class="lead" data-header="[index](https://antoine07.github.io/r)" data-theme="default" lang="C" class="lead" data-marpit-pagination="30" style="--paginate:true;--class:lead;--header:[index](https://antoine07.github.io/r);--theme:default;" data-marpit-pagination-total="37">

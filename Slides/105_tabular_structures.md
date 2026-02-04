@@ -121,18 +121,14 @@ C'est le rôle de `tibble`.
 
 ## `tibble` — définition
 
-Un `tibble` est un **data.frame moderne**, fourni par le tidyverse.
+Un `tibble` est un **data.frame moderne**, fourni par le `tidyverse`.
 
 Il respecte le même modèle tabulaire,
 mais avec des **règles plus strictes**.
 
 ```r
-if (!require("pacman", quietly = TRUE)) {
-  install.packages("pacman")
-}
-library(pacman)
-
-pacman::p_load(tibble)
+# methode de geek à réserver pour la sandbox pas en projet
+library(tidyverse)
 
 tb <- tibble(
   region = c("North", "South"),
@@ -142,16 +138,18 @@ tb <- tibble(
 tb
 ```
 
+Rappel dans la console `install.packages("tidyverse")` puis `renv::snapshot()`
+
 ---
 
 ## `tibble` — différences clés avec `data.frame`
 
 Un `tibble` :
 
-- ne convertit **jamais** automatiquement le texte en `factor`
-- n'utilise **pas de `rownames`**
+- ne convertit **jamais** automatiquement le texte en `factor` (variable catégorielle)
+- n'utilise **pas de `rownames`** (noms automatiques inutiles)
 - affiche un aperçu lisible
-- ne tronque pas silencieusement les colonnes
+- ne tronque pas silencieusement les colonnes (affiche sans dire que tout n'est pas montré)
 
 👉 Le comportement est **prévisible et explicite**.
 
@@ -160,7 +158,7 @@ Un `tibble` :
 ## Exemple : import de données avec `readr`
 
 ```r
-pacman::p_load(readr)
+# library(tidyverse) déjà dans ce package
 
 sales <- readr::read_csv("TPs/r/data/sales.csv")
 str(sales)
@@ -216,8 +214,7 @@ result <- x |>
 Chaque calcul est fait **ligne par ligne**.
 
 ```r
-# mutate est dans cette librarie, on la charge 
-pacman::p_load(dplyr)
+# dplyr mutate est dans cette librarie, on la charge 
 
 sales <- sales |>
   mutate(
@@ -263,9 +260,9 @@ sales <- sales |>
 
 R lit **chaque ligne** et applique la formule :
 
-* Ligne 1 → `2 * 10 = 20`
-* Ligne 2 → `5 * 8 = 40`
-* Ligne 3 → `1 * 20 = 20`
+- Ligne 1 → `2 * 10 = 20`
+- Ligne 2 → `5 * 8 = 40`
+- Ligne 3 → `1 * 20 = 20`
 
 ---
 
@@ -295,10 +292,10 @@ C'est **vectorisé**, pas une boucle explicite.
 
 ## À ne pas confondre
 
-* ❌ `mutate()` ne résume pas les données
+- ❌ `mutate()` ne résume pas les données
   (ça, c'est `summarise()`)
 
-* ❌ `mutate()` ne crée pas une seule valeur
+- ❌ `mutate()` ne crée pas une seule valeur
   (une valeur par ligne)
 
 ---
@@ -326,8 +323,7 @@ Imaginons :
 ### Code
 
 ```r
-pacman::p_load(dplyr)
-
+# dplyr 
 sales_summary <- sales |>
   summarise(
     total_units   = sum(units),
@@ -342,9 +338,9 @@ sales_summary <- sales |>
 
 Il ne travaille **plus ligne par ligne** :
 
-* `sum(units)` → 2 + 5 + 1 = **8**
-* `sum(units * price)` → 20 + 40 + 20 = **80**
-* `mean(price)` → (10 + 8 + 20) / 3 = **12.67**
+- `sum(units)` → 2 + 5 + 1 = **8**
+- `sum(units * price)` → 20 + 40 + 20 = **80**
+- `mean(price)` → (10 + 8 + 20) / 3 = **12.67**
 
 ---
 
@@ -370,8 +366,8 @@ Parce que :
 
 ## À ne pas confondre
 
-* ❌ `summarise()` ne crée pas une colonne par ligne
-* ❌ `summarise()` ne conserve pas le détail
+- ❌ `summarise()` ne crée pas une colonne par ligne
+- ❌ `summarise()` ne conserve pas le détail
 
 ---
 

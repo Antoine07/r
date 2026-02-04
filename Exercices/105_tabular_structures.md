@@ -1,14 +1,5 @@
 # TP — Analyse de ventes avec `tibble`
 
-```r
-if (!require("pacman", quietly = TRUE)) {
-  install.packages("pacman")
-}
-library(pacman)
-
-pacman::p_load(readr, dplyr, tibble, lubridate)
-```
-
 ## Contexte métier
 
 Vous travaillez au sein d'une équipe **data / reporting**.
