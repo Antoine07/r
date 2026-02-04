@@ -150,3 +150,35 @@ total
 
 📌 Présenté ici pour la culture générale.
 
+---
+
+# Parcourir une liste de vecteurs
+
+```r
+values <- list(1:3, 10:12, 100:102) # liste de listes, 3 éléments
+for (v in values) {        # 1ère boucle : la liste
+  for (x in v) {           # 2ème boucle : le vecteur
+    print(x)
+  }
+}
+```
+
+---
+
+## Convertir avec as.*()
+
+```r
+as.Date() → convertir en date
+as.numeric() → convertir en nombre
+as.character() → convertir en texte
+as.factor() → convertir en catégorie
+as.logical() → convertir en booléen
+
+d <- as.Date("2024-12-31")
+d + 1
+# [1] "2025-01-01"
+
+x <- c("A", "B", "A", "C")
+f <- as.factor(x)
+# [1] "A" "B" "C"
+```

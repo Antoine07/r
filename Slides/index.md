@@ -37,6 +37,7 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 
 ## Chapitres — Fondamentaux langage / data
 
+- [Date](https://antoine07.github.io/r/114_date.html)
 - [Modèle mémoire et vecteurs atomiques](https://antoine07.github.io/r/103_memory_vectors.html)
 - [Structures composées (listes, matrices, arrays, attributes)](https://antoine07.github.io/r/104_composite_structures.html)
 - [Structures tabulaires (data.frame, tibble, data.table)](https://antoine07.github.io/r/105_tabular_structures.html)
