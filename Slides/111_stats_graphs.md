@@ -46,6 +46,8 @@ cars <- mtcars |>
 glimpse(cars)
 ```
 
+---
+
 Variables utiles ici:
 - `mpg`: consommation (numérique)
 - `wt`: poids (numérique)
@@ -192,6 +194,8 @@ ggplot(aq, aes(x = Month, y = Ozone)) +
   geom_boxplot() +
   labs(title = "Ozone par mois", x = "Mois", y = "Ozone")
 ```
+
+---
 
 Option: visualiser la moyenne par mois (table + plot).
 

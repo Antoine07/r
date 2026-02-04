@@ -25,8 +25,10 @@ Les exemples utilisent `mtcars`, un jeu de données déjà inclus dans R.
 - nombre de cylindres (`cyl`)
 - type de transmission (`am`)
 
+---
+
 ```r
-pacman::p_load(tidyverse)
+library(tidyverse)
 
 data(mtcars)
 
