@@ -50,7 +50,7 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 `3h30`
 
 - [`ggplot2` (introduction)](https://antoine07.github.io/r/110_ggplot2_intro.html)
-- [`ggplot2` (introduction)](https://antoine07.github.io/r/111_stats_graphs.html)
+- [`ggplot2` (stat et graph)](https://antoine07.github.io/r/111_stats_graphs.html)
 
 ---
 
