@@ -8,24 +8,25 @@ header: "[index](https://antoine07.github.io/r)"
 
 # Dataviz avec `ggplot2`
 
-**Objectif**
-Apprendre à construire des graphiques simples avec `ggplot2`.
-
-Les exemples utilisent `mtcars`, un jeu de données déjà inclus dans R.
+Les exemples utilisent `mtcars`, un jeu de données inclus par défaut dans R.
 
 ---
 
 ## Données d'exemple — `mtcars`
 
-`mtcars` décrit des voitures :
+`mtcars` décrit des caractéristiques de voitures :
 
-- consommation (`mpg`)
-- poids (`wt`)
-- puissance (`hp`)
-- nombre de cylindres (`cyl`)
-- type de transmission (`am`)
+- consommation `mpg`
+- poids `wt`
+- puissance `hp`
+- nombre de cylindres `cyl`
+- type de transmission `am`
+
+Certaines variables sont **numériques** mais représentent des **groupes**.
 
 ---
+
+## Préparer les données
 
 ```r
 library(tidyverse)
@@ -33,65 +34,66 @@ library(tidyverse)
 data(mtcars)
 
 cars <- mtcars |>
-  tibble::as_tibble(rownames = "model") # transforme mtcars un dataframe en tibble
+  tibble::as_tibble(rownames = "model") |>
+  mutate(
+    cyl = factor(cyl),
+    am  = factor(am, labels = c("Automatique", "Manuelle"))
+  )
 
 glimpse(cars)
 ```
 
-👉 On se contente ici de rendre les données plus lisibles.
-Aucune transformation "avancée".
+---
+
+👉
+
+- `mtcars` est transformé en **tibble**
+- les noms de lignes deviennent une variable `model`
+- les variables de groupe sont converties en **facteurs**
 
 ---
 
-## Le principe de `ggplot()`
+## Principe de `ggplot()`
 
-Un graphique `ggplot2` se construit **par couches**.
+Un graphique `ggplot2` se construit **par couches** :
 
-- `ggplot(data, aes(...))`
-  → quelles données et quelles variables
-- `+ geom_*()`
-  → quel type de graphique
-- `+ labs(...)`
+* `ggplot(data, aes(...))`
+  → données et variables
+* `+ geom_*()`
+  → type de graphique
+* `+ labs(...)`
   → titres et légendes
 
+---
+
+## Nuage de points simple
+
 ```r
-# nuage de point mpg = miles per gallon et wt = weight 
 ggplot(cars, aes(x = wt, y = mpg)) +
   geom_point()
 ```
 
-👉 Relation entre le poids et la consommation.
+👉 Relation entre le **poids** et la **consommation**.
 
 ---
 
 ## Mapping vs valeur fixe
 
-- **Dans `aes()`** : dépend des données
-- **Hors `aes()`** : valeur imposée
+* **Dans `aes()`** → dépend des données
+* **Hors `aes()`** → valeur imposée
 
 ```r
-# cyl contient des valeurs (4, 6, 8) ggplot2 attribue une couleur différente à chaque valeur
 ggplot(cars, aes(x = wt, y = mpg, color = cyl)) +
   geom_point(alpha = 0.8)
 ```
 
-👉 La couleur dépend du nombre de cylindres.
+👉 La couleur dépend du **nombre de cylindres** (variable de groupe).
 
 ---
 
 ## Comptages — `geom_bar()`
 
-`geom_bar()` compte automatiquement le nombre de lignes par catégorie.
-
-```r
-cars |>
-  group_by(cyl) |>
-  summarise(n = n()) # rappel n() compte le nombre de lignes 
-
-# Une autre manière de faire ça plus rapide 
-cars |>
-  count(cyl)
-```
+`geom_bar()` compte automatiquement le nombre d'observations par catégorie.
 
 ```r
 ggplot(cars, aes(x = cyl)) +
@@ -103,13 +105,13 @@ ggplot(cars, aes(x = cyl)) +
   )
 ```
 
-👉 Chaque barre correspond à un nombre de voitures.
+👉 Chaque barre correspond au nombre de voitures par type de cylindre.
 
 ---
 
 ## Barres empilées — variable dérivée
 
-On crée une nouvelle colonne simple pour classer les voitures.
+On crée une variable catégorielle simple à partir de `mpg`.
 
 ```r
 cars2 <- cars |>
@@ -117,6 +119,8 @@ cars2 <- cars |>
     mpg_band = if_else(mpg >= 20, "Économe", "Gourmande")
   )
 ```
+
+---
 
 ```r
 ggplot(cars2, aes(x = cyl, fill = mpg_band)) +
@@ -129,20 +133,16 @@ ggplot(cars2, aes(x = cyl, fill = mpg_band)) +
   )
 ```
 
-👉 Une même barre, découpée en sous-catégories.
+👉 Une barre par cylindre, découpée selon le type de consommation.
 
 ---
 
-## Comparer des groupes — `geom_boxplot()`
+## Comparer des groupes — boxplots hookups
 
-Le boxplot permet de comparer des valeurs entre groupes.
-
-boxplot = diagramme à moustache 
-
-Utilisez `factor` pour créer des groupes, sinon la variable x sera considérée comme une variable continue par ggplot.
+Le boxplot permet de comparer une variable numérique entre groupes.
 
 ```r
-ggplot(cars, aes(x = factor(cyl), y = mpg)) +
+ggplot(cars, aes(x = cyl, y = mpg)) +
   geom_boxplot() +
   labs(
     title = "Consommation selon les cylindres",
@@ -151,8 +151,10 @@ ggplot(cars, aes(x = factor(cyl), y = mpg)) +
   )
 ```
 
+---
+
 ```r
-ggplot(cars, aes(x = factor(cyl), y = hp)) +
+ggplot(cars, aes(x = cyl, y = hp)) +
   geom_boxplot() +
   labs(
     title = "Puissance selon les cylindres",
@@ -161,9 +163,11 @@ ggplot(cars, aes(x = factor(cyl), y = hp)) +
   )
 ```
 
+👉 Les groupes sont définis par des **facteurs**.
+
 ---
 
-## Relations — nuage de points
+## Relations — nuage de points groupé
 
 ```r
 ggplot(cars, aes(x = wt, y = mpg, color = cyl)) +
@@ -176,25 +180,38 @@ ggplot(cars, aes(x = wt, y = mpg, color = cyl)) +
   )
 ```
 
-👉 On observe si deux variables évoluent ensemble.
+👉 On observe la relation entre deux variables quantitatives, par groupe.
 
 ---
 
-## Ajouter une tendance simple
+## Ajouter une tendance linéaire
+
+Chaque groupe possède sa propre droite de régression.
 
 ```r
 ggplot(cars, aes(x = wt, y = mpg, color = cyl)) +
   geom_point(alpha = 0.7) +
   geom_smooth(method = "lm", se = FALSE) +
   labs(
-    title = "Tendance linéaire entre poids et consommation"
+    title = "Tendance linéaire entre poids et consommation",
+    color = "Cylindres"
   )
 ```
 
-👉 La droite aide à lire la tendance générale.
+👉 La droite aide à lire la **tendance moyenne** pour chaque groupe.
+
+---
+
+## Règles essentielles à retenir
+
+* Une variable de groupe → **facteur**
+* `geom_bar()` → **données non agrégées**
+* `geom_col()` → **données déjà agrégées**
+* `geom_smooth()` applique une **transformation statistique**
+* Toujours vérifier le **type des variables**
 
 ---
 
 ## Exercices — `iris`
 
-Les exercices reprennent **exactement les mêmes idées** :
+Sujet: `Exercices/110_ggplot2_intro.md`
