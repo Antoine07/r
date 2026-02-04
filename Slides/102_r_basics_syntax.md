@@ -47,7 +47,7 @@ typeof(TRUE)
 
 ---
 
-## 3. Vecteurs : la structure centrale de R
+## Vecteurs : la structure centrale de R
 
 Un vecteur = plusieurs valeurs du **même type**.
 
@@ -62,7 +62,7 @@ mean(v)
 
 ---
 
-## 4. Coercition (conversion automatique)
+##  Coercition (conversion automatique)
 
 ```r
 c(1, "a", TRUE)
@@ -88,7 +88,7 @@ rev(v)   # ordre inversé
 
 ---
 
-#-  Sélection par condition (logique)
+##  Sélection par condition (logique)
 
 ```r
 v[v >= 20]
@@ -112,7 +112,7 @@ mean(x, na.rm = TRUE)  # ignore les NA
 
 ---
 
-## 8. Fonctions : regrouper des instructions
+## Fonctions : regrouper des instructions
 
 ```r
 add <- function(a, b) {
@@ -128,7 +128,7 @@ add(2, 3)
 
 ---
 
-## 9. Décider et répéter (minimum vital)
+## Décider et répéter (minimum vital)
 
 ### Condition
 
@@ -152,7 +152,7 @@ total
 
 ---
 
-# Parcourir une liste de vecteurs
+## Parcourir une liste de vecteurs
 
 ```r
 values <- list(1:3, 10:12, 100:102) # liste de listes, 3 éléments
