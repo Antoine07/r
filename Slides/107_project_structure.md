@@ -6,8 +6,6 @@ class: lead
 header: "[index](https://antoine07.github.io/r)"
 ---
 
----
-
 # Structurer un projet R
 
 **Objectif**
@@ -119,7 +117,7 @@ doit pouvoir être **supprimé puis recréé** en relançant le code.
 
 ---
 
-## Flux de travail logique
+## Flux de travail logique - voir workflow sur github
 
 ```text
 data/raw/
@@ -207,7 +205,7 @@ C'est la base d'un projet R propre et professionnel.
 
 ### Projet pour le cours 
 
-Récupérez les supports de cours en les clonants ou en les téléchargeants. Puis suivez les étapes ci-après pour installer votre projet.
+Récupérez les supports de cours `git clone`
 
 - [`mini projet`](https://github.com/Antoine07/r/starter/)
 

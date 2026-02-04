@@ -25,7 +25,8 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 - [Introduction: pourquoi R ?](https://antoine07.github.io/r/000_intro_why_r.html)
 - [Installer R & RStudio](https://antoine07.github.io/r/000_install_r_rstudio.html)
 - [RStudio: workflow](https://antoine07.github.io/r/101_rstudio_workflow.html)
-- [Organiser un projet R](https://antoine07.github.io/r/107_project_structure.html)
+
+- [Sandbox installation](https://github.com/Antoine07/r/Slides/000_starter_simple.md)
 
 ---
 
@@ -47,12 +48,12 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 
 - [`ggplot2` (introduction)](https://antoine07.github.io/r/111_stats_graphs.html)
 
-
 ---
 
 ## TP final 
 
 à faire par équipe et à présenter
 
+- [Organiser un projet R](https://antoine07.github.io/r/107_project_structure.html)
 - [`TP Taxi` (introduction)](https://github.com/Antoine07/r/tp_final.md)
 
