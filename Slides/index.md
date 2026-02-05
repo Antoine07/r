@@ -46,6 +46,8 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 - [Modèle mémoire et vecteurs atomiques](https://antoine07.github.io/r/103_memory_vectors.html)
 - [Date](https://antoine07.github.io/r/114_date.html)
 
+---
+
 ### Approche par la pratique 
 
 - Sur le dépôt ouvrez le dossier `Examples` et placez le ficher R dans votre dossier `RStudio`
@@ -55,6 +57,7 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 
 - [Structures composées (listes, matrices)](https://antoine07.github.io/r/104_composite_structures.html)
 
+---
 
 ## Chapitre nettoyage
 
