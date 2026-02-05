@@ -43,10 +43,22 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 
 `4h30`
 
-- [Date](https://antoine07.github.io/r/114_date.html)
 - [Modèle mémoire et vecteurs atomiques](https://antoine07.github.io/r/103_memory_vectors.html)
-- [Structures composées (listes, matrices, arrays, attributes)](https://antoine07.github.io/r/104_composite_structures.html)
-- [Structures tabulaires (data.frame, tibble)](https://antoine07.github.io/r/105_tabular_structures.html)
+- [Date](https://antoine07.github.io/r/114_date.html)
+
+### Approche par la pratique 
+
+- Sur le dépôt ouvrez le dossier `Examples` et placez le ficher R dans votre dossier `RStudio`
+
+- [Structures tabulaires (tibble)](https://antoine07.github.io/r/105_tabular_structures.html)
+
+## Chapitre structure de données liste matrice
+
+- [Structures composées (listes, matrices)](https://antoine07.github.io/r/104_composite_structures.html)
+
+
+## Chapitre nettoyage
+
 - [Import & nettoyage](https://antoine07.github.io/r/108_import_cleaning.html)
 
 ---

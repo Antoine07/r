@@ -80,6 +80,18 @@ Sans `format`, R ne peut pas deviner.
 
 ---
 
+## Format une date - affichage
+
+```r
+format(as.Date("2026-01-15"), "%Y-%m")
+
+# Attenion à cette erreur
+x <- format(as.Date("2026-01-15"), "%Y-%m")
+x + 1   # ❌ erreur
+```
+
+---
+
 ## Différence entre date et durée
 
 ```r
@@ -90,6 +102,21 @@ d1 - d0
 ```
 
 👉 Résultat = **durée en jours** `difftime`.
+
+---
+
+## Autres formats de date
+
+```r
+d <- as.Date("05|02|2026", format = "%d|%m|%Y")
+e <- as.Date("2026***02***05", format = "%Y***%m***%d")
+
+# install.packages("tidyverse") # en console
+ library(tidyverse)
+f <- dmy("05 février 2026", locale = "fr_FR")
+
+print(f)
+``` 
 
 ---
 

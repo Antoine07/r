@@ -6,170 +6,95 @@ class: lead
 header: "[index](https://antoine07.github.io/r)"
 ---
 
-# Structures tabulaires en R
+# Structures tabulaires en R (avec tibble)
 
 Objectif du chapitre :
 
-- comprendre les structures tabulaires en R
-- savoir **quand** et **pourquoi** utiliser chacune
-- éviter les comportements implicites piégeux
+- comprendre ce qu'est une **structure tabulaire**
+- manipuler des données sous forme de **tables**
+- écrire des traitements lisibles et prévisibles
 - préparer les chapitres d'agrégation et de reporting
 
 ---
 
-## Panorama des structures tabulaires
+## Une structure tabulaire
 
-En R, plusieurs structures permettent de représenter des données tabulaires.
+En analyse de données, on manipule des **tables** :
 
-Dans ce chapitre, nous nous concentrons sur :
+- des **lignes** : observations
+- des **colonnes** : variables
+- chaque colonne a un **type**
+- toutes les colonnes ont la même longueur
 
-- `data.frame` (base R)
-- `tibble` (tidyverse)
-
-Elles représentent **le même concept**, mais avec des **choix de conception différents**.
-
----
-
-## `data.frame` — définition
-
-Un `data.frame` est une **liste de colonnes** :
-
-- chaque colonne est un **vecteur atomique**
-- toutes les colonnes ont la **même longueur**
-- chaque ligne représente une observation
-
-```r
-df <- data.frame(
-  region = c("North", "South"),
-  units  = c(12L, 8L),
-  price  = c(49.99, 49.99)
-)
-
-str(df)
-```
-
----
-
-## `data.frame` — propriétés importantes
-
-- structure tabulaire de base en R
-- universellement supporté
-- très flexible
-
-Mais aussi :
-
-⚠️ structure **historique**, avec certains comportements implicites.
-
----
-
-## `data.frame` — points de vigilance
-
-Selon la configuration de R :
-
-- conversion automatique `character → factor`
-- présence de `rownames` implicites
-- comportements parfois silencieux
-
-Exemple :
-
-```r
-df2 <- data.frame(region = c("North", "South"))
-str(df2)
-```
-
-👉 Ces comportements peuvent introduire des bugs discrets en data.
-
----
-
-## `data.frame` — accès et sous-ensemble
-
-```r
-df$units
-df[1, ]
-df[df$region == "North", ]
-df[, c("region", "units")]
-```
-
----
-
-## Question de compréhension
-
-```r
-df[, 1:2]
-```
-
-❓ Questions :
-
-- que retourne cette expression ?
-- quel est le type de l'objet retourné ?
-- pourquoi R ne retourne pas un simple vecteur ?
-
----
-
-## Pourquoi une alternative au `data.frame` ?
-
-En analyse de données moderne, on cherche :
-
-- moins de conversions implicites
-- des erreurs visibles plus tôt
-- des comportements plus prévisibles
-- une meilleure intégration dans des pipelines
-
-C'est le rôle de `tibble`.
+👉 En R moderne, cette structure s'appelle un **tibble**.
 
 ---
 
 ## `tibble` — définition
 
-Un `tibble` est un **data.frame moderne**, fourni par le `tidyverse`.
+Un `tibble` est une **table de données moderne** pour R.
 
-Il respecte le même modèle tabulaire,
-mais avec des **règles plus strictes**.
+- chaque colonne est un **vecteur**
+- chaque ligne est une **observation**
+- comportement **explicite et prévisible**
+- pensé pour l'analyse de données
 
 ```r
-# methode de geek à réserver pour la sandbox pas en projet
-library(tidyverse)
+library(tibble)
 
-tb <- tibble(
+sales <- tibble(
   region = c("North", "South"),
-  units  = c(12L, 8L)
+  units  = c(12L, 8L),
+  price  = c(49.99, 49.99)
 )
 
-tb
+sales
 ```
-
-Rappel dans la console `install.packages("tidyverse")` puis `renv::snapshot()`
 
 ---
 
-## `tibble` — différences clés avec `data.frame`
+## Pourquoi utiliser `tibble`
 
 Un `tibble` :
 
-- ne convertit **jamais** automatiquement le texte en `factor` (variable catégorielle)
-- n'utilise **pas de `rownames`** (noms automatiques inutiles)
+- ne modifie pas les types sans le dire
+- ne crée pas de variables implicites
 - affiche un aperçu lisible
-- ne tronque pas silencieusement les colonnes (affiche sans dire que tout n'est pas montré)
+- signale clairement ce qui est montré ou non
 
-👉 Le comportement est **prévisible et explicite**.
+👉 Moins de surprises, plus de contrôle.
 
 ---
 
-## Exemple : import de données avec `readr`
+## Accéder aux données d'un tibble
 
 ```r
-# library(tidyverse) déjà dans ce package
+sales$units          # colonne
+sales[1, ]           # ligne
+sales[, c("region", "units")]
+sales[sales$region == "North", ]
+```
 
-sales <- readr::read_csv("TPs/r/data/sales.csv")
-str(sales)
+👉 La logique est **identique** à une table classique.
+
+---
+
+## Importer des données : format standard
+
+Les outils d'import modernes retournent directement des `tibble`.
+
+```r
+library(readr)
+
+sales <- read_csv("TPs/r/data/sales.csv")
+sales
 ```
 
 Ce que fait `readr` :
-- typage automatique contrôlé
-- pas de facteurs implicites
-- retour d'un `tibble`
 
-👉 C'est le format recommandé pour les pipelines data.
+- typage automatique visible
+- pas de conversions implicites
+- retour systématique d'un `tibble`
 
 ---
 
@@ -179,42 +104,37 @@ Ce que fait `readr` :
 
 ## Le pipe `|>` — principe
 
-Le pipe permet d'écrire des traitements **de gauche à droite**.
-
-```r
-result <- f(g(h(x)))
-```
-
-devient :
+Le pipe permet d'enchaîner des traitements
+**de gauche à droite**.
 
 ```r
 result <- x |>
-  h() |>
+  f() |>
   g() |>
-  f()
+  h()
 ```
 
-👉 Lecture naturelle : *"prendre x, puis …"*
+👉 Lecture naturelle :
+
+> prendre x, puis faire f, puis g, puis h
 
 ---
 
-## Pourquoi utiliser le pipe en data
+## Pourquoi utiliser le pipe
 
-- améliore la lisibilité
-- évite les variables intermédiaires
-- reflète un enchaînement logique de traitements
-- standard moderne en R (base depuis R 4.1)
+- code plus lisible
+- moins de variables intermédiaires
+- enchaînement logique clair
+- standard moderne de R (base)
 
 ---
 
-## `mutate()` — enrichir les données
+## `mutate()` — enrichir un tibble
 
-`mutate()` sert à **créer ou modifier des colonnes** dans un tibble.
-
-Chaque calcul est fait **ligne par ligne**.
+`mutate()` sert à **ajouter ou modifier des colonnes**.
 
 ```r
-# dplyr mutate est dans cette librarie, on la charge 
+library(dplyr)
 
 sales <- sales |>
   mutate(
@@ -222,108 +142,36 @@ sales <- sales |>
   )
 ```
 
-👉 Lecture métier :
-*"le chiffre d'affaires d'une ligne vaut quantité × prix"*
+👉 Le calcul est fait **ligne par ligne**.
 
 ---
 
-`mutate()` sert à **ajouter une colonne calculée** à un tableau de données (tibble / data frame).
-
-👉 **Règle clé** : le calcul se fait **ligne par ligne**, automatiquement.
-
----
-
-### Données de départ (`sales`)
-
-Imaginons :
-
-| product | units | price |
-| ------- | ----- | ----- |
-| A       | 2     | 10    |
-| B       | 5     | 8     |
-| C       | 1     | 20    |
-
----
-
-### Code
-
-```r
-sales <- sales |>
-  mutate(
-    revenue = units * price
-  )
-```
-
----
-
-### Ce que R fait en réalité
-
-R lit **chaque ligne** et applique la formule :
-
-- Ligne 1 → `2 * 10 = 20`
-- Ligne 2 → `5 * 8 = 40`
-- Ligne 3 → `1 * 20 = 20`
-
----
-
-### Résultat
-
-| product | units | price | revenue |
-| ------- | ----- | ----- | ------- |
-| A       | 2     | 10    | 20      |
-| B       | 5     | 8     | 40      |
-| C       | 1     | 20    | 20      |
-
-👉 `revenue` est **une nouvelle colonne**, pas une variable unique.
-
----
-
-## Pourquoi on dit "ligne par ligne"
+## Pourquoi on dit « ligne par ligne »
 
 Parce que :
 
-- `units` est un **vecteur**
-- `price` est un **vecteur**
-- `units * price` est fait **élément par élément**
+- `units` est un vecteur
+- `price` est un vecteur
+- le calcul est fait **élément par élément**
 
-C'est **vectorisé**, pas une boucle explicite.
+C'est du **calcul vectorisé**, pas une boucle.
 
 ---
 
 ## À ne pas confondre
 
 - ❌ `mutate()` ne résume pas les données
-  (ça, c'est `summarise()`)
+- ❌ `mutate()` ne produit pas une seule valeur
 
-- ❌ `mutate()` ne crée pas une seule valeur
-  (une valeur par ligne)
-
----
-
-## `summarise()`
-
-`summarise()` sert à **réduire les données** en **valeurs agrégées**.
-
-👉 **Règle clé** : le calcul se fait **sur l'ensemble des lignes** (ou par groupe), pas ligne par ligne.
+Chaque ligne garde sa propre valeur.
 
 ---
 
-### `sales`
+## `summarise()` — réduire les données
 
-Imaginons :
-
-| product | units | price |
-| ------- | ----- | ----- |
-| A       | 2     | 10    |
-| B       | 5     | 8     |
-| C       | 1     | 20    |
-
----
-
-### Code
+`summarise()` sert à **calculer des valeurs globales**.
 
 ```r
-# dplyr 
 sales_summary <- sales |>
   summarise(
     total_units   = sum(units),
@@ -332,46 +180,20 @@ sales_summary <- sales |>
   )
 ```
 
----
-
-## Ce que R fait en réalité
-
-Il ne travaille **plus ligne par ligne** :
-
-- `sum(units)` → 2 + 5 + 1 = **8**
-- `sum(units * price)` → 20 + 40 + 20 = **80**
-- `mean(price)` → (10 + 8 + 20) / 3 = **12.67**
+👉 Plusieurs lignes → une ligne de synthèse.
 
 ---
 
-## Résultat
+## Différence clé
 
-| total_units | total_revenue | avg_price |
-| ----------- | ------------- | --------- |
-| 8           | 80            | 12.67     |
-
-👉 Le tableau est **réduit à une seule ligne**.
-
----
-
-## Pourquoi on dit "résumer"
-
-Parce que :
-
-- plusieurs lignes d'entrée
-- **une ou quelques lignes en sortie**
-- information **synthétique**
+| Fonction      | Effet                      |
+| ------------- | -------------------------- |
+| `mutate()`    | ajoute des colonnes        |
+| `summarise()` | réduit le nombre de lignes |
 
 ---
 
-## À ne pas confondre
-
-- ❌ `summarise()` ne crée pas une colonne par ligne
-- ❌ `summarise()` ne conserve pas le détail
-
----
-
-## Avec regroupement `group_by()`
+## Regrouper avec `group_by()`
 
 ```r
 sales |>
@@ -382,35 +204,11 @@ sales |>
   )
 ```
 
-➡️ Résumé **par produit**, une ligne par groupe.
+👉 Une ligne de résultat **par groupe**.
 
 ---
 
-sales
-┌─────────┬────────┬───────┐
-│ product │ units  │ price │
-├─────────┼────────┼───────┤
-│ A       │   2    │  10   │
-│ A       │   1    │  10   │
-│ B       │   5    │   8   │
-│ B       │   3    │   8   │
-│ C       │   1    │  20   │
-└─────────┴────────┴───────┘
-
-
----
-
-┌─────────┬─────────────┬───────────────┐
-│ product │ total_units │ total_revenue │
-├─────────┼─────────────┼───────────────┤
-│ A       │      3      │      30       │
-│ B       │      8      │      64       │
-│ C       │      1      │      20       │
-└─────────┴─────────────┴───────────────┘
-
----
-
-sales
+## Exemple complet
 
 ```r
 sales <- tibble(
@@ -422,43 +220,44 @@ sales <- tibble(
 sales |>
   group_by(product) |>
   summarise(
-    total_units = sum(units)
-)
-
+    total_units = sum(units),
+    total_revenue = sum(units * price)
+  )
 ```
 
 ---
 
-## Pourquoi `tibble` est privilégié en data
+## Pourquoi `tibble` est le standard en data
 
-- moins de surprises
-- nettoyage plus simple
-- erreurs détectées plus tôt
-- meilleure lisibilité
-- cohérence avec `dplyr`, `tidyr`, `readr`
+- comportement explicite
+- pipelines plus lisibles
+- intégration naturelle avec :
 
-👉 `tibble` est pensé pour l'analyse, pas seulement pour le stockage.
+  - `dplyr`
+  - `tidyr`
+  - readr`
+- adapté aux analyses réelles
+
+👉 C'est le format de travail courant en data.
 
 ---
 
 ## Cube analytique — intuition métier
 
-Un **cube analytique** permet d'analyser une mesure métier
-selon **plusieurs axes en même temps**.
+Un cube analytique permet d'analyser une mesure
+selon **plusieurs dimensions** :
 
-Exemples de questions auxquelles il répond :
+- produit
+- région
+- date
 
-- Quel est le chiffre d'affaires **par région et par date** ?
-- Quel produit performe le mieux **selon les régions** ?
-- Comment évoluent les ventes **dans le temps** ?
-
-👉 On ne regarde plus des lignes,
-👉 on regarde des **dimensions d'analyse**.
+👉 On ne lit plus ligne par ligne
+👉 On analyse selon des axes métier
 
 ---
 
 ```r
-pacman::p_load(tibble)
+library(tibble)
 
 sales <- tibble(
   region  = c("EU", "EU", "EU", "US", "US", "US"),
@@ -480,3 +279,4 @@ sales <- tibble(
 ## Exercice
 
 `Exercices/105_tabular_structures.md`
+
