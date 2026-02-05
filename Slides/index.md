@@ -49,7 +49,6 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 ### Approche par la pratique 
 
 - Sur le dépôt ouvrez le dossier `Examples` et placez le ficher R dans votre dossier `RStudio`
-
 - [Structures tabulaires (tibble)](https://antoine07.github.io/r/105_tabular_structures.html)
 
 ## Chapitre structure de données liste matrice
@@ -63,26 +62,25 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 
 ---
 
-## Chapitres — ggplot2 
+## TP final 
+
+à faire par équipe et à présenter `2h`
+
+- [`TP Date *` (introduction)](https://github.com/Antoine07/r/tp_date.md)
+- [`TP Taxi ***` (introduction)](https://github.com/Antoine07/r/tp_final.md)
+
+Optionnel si vous voulez organiser votre projet
+
+- [Organiser un projet R](https://antoine07.github.io/r/107_project_structure.html)
+
+---
+
+## Pour aller plus loin 
 
 `3h30`
 
 - [`ggplot2` (introduction)](https://antoine07.github.io/r/110_ggplot2_intro.html)
 - [`ggplot2` (stat et graph)](https://antoine07.github.io/r/111_stats_graphs.html)
-
----
-
-## TP final 
-
-à faire par équipe et à présenter `2h`
-
-- [Organiser un projet R](https://antoine07.github.io/r/107_project_structure.html)
-- [`TP Taxi` (introduction)](https://github.com/Antoine07/r/tp_final.md)
-
----
-
-## Hors scop sans doute
-
 - [Manipulation de données (dplyr, tidyr)](https://antoine07.github.io/r/106_data_manipulation.html)
 - [`dplyr` (annexe)](https://antoine07.github.io/r/109_dplyr_basics.html)
 - [Cubes (tableaux de contingence)](https://antoine07.github.io/r/105_1_cubes.html)

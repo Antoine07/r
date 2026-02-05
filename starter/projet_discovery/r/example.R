@@ -112,6 +112,10 @@ dossiers$mois_depot <- format(dossiers$depot, "%Y-%m")
 # Délai moyen par mois
 # ---------------------------
 
+notes  <- c(12, 15, 10, 8)
+classe <- c("A", "A", "B", "B")
+tapply(notes, classe, mean)
+
 delai_moyen_par_mois <- tapply(
   dossiers$delai,
   dossiers$mois_depot,
@@ -144,21 +148,8 @@ delai_stats_par_mois <- tapply(
 
 delai_stats_par_mois
 
-# ---------------------------
-# Version tabulaire (data.frame)
-# ---------------------------
-
-delai_stats_df <- data.frame(
-  mois_depot = names(delai_stats_par_mois),
-  mean_delai = sapply(delai_stats_par_mois, function(x) x["mean"]),
-  max_delai  = sapply(delai_stats_par_mois, function(x) x["max"])
-)
-
-delai_stats_df
-
-
 # ===========================
-# AGGREGATE — dplyr (équivalent)
+# AGGREGATE — dplyr 
 # ===========================
 
 # Délai moyen par mois

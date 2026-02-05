@@ -361,4 +361,6 @@ sum(x, na.rm = TRUE) # retourne 7
 
 ## Exercice - températures janvier & février 
 
-Sujet: `Exercices/103_memory_vectors.md`
+Sujet: `Exercices/103_memory_vectors.md` et `Exercices/113_menory_vector.md`
+
+
