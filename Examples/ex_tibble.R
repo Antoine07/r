@@ -17,6 +17,10 @@ dossiers <- tibble(
   ))
 )
 
+# voir les données avant de commencer à travailler dessus
+head(dossiers, 2)
+tail(dossiers, 2)
+
 # ===========================
 # SLICING — lignes
 # ===========================
