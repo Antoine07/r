@@ -99,6 +99,8 @@ R ne stocke pas toutes les valeurs immédiatement, mais **sait comment les calcu
 r <- 1:1e8
 ```
 
+---
+
 - R connaît : le début, la fin, le pas
 - Il peut calculer une valeur ponctuelle sans parcourir tout le vecteur :
 
