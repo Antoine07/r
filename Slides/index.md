@@ -9,6 +9,7 @@ header: "[index](https://antoine07.github.io/r)"
 # Cours R — Index (GitHub Pages)
 
 Site: https://antoine07.github.io/r
+Dépôt: https://github.com/Antoine07/r
 
 Objectif: fournir une navigation vers toutes les pages HTML générées dans `docs/`.
 
