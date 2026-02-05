@@ -14,11 +14,42 @@ january <- c(
 ### Questions
 
 1. Donner toutes les températures **strictement supérieures à 0**.
-2. Comparer le nombre de températures **positives** et **négatives** (en ignorant les valeurs manquantes).
-3. Donner la **moyenne des températures positives** du mois.
-4. Créer un vecteur `days` correspondant aux jours du mois et donner les **jours où la température était > 0**.
-5. Donner toutes les températures **supérieures à 0 à partir du 10ᵉ jour**.
-6. Remplacer les **températures négatives** par la **moyenne des températures positives** (sans modifier les `NA`).
+
+```r
+january[ january > 0 & !is.na(january)]
+```
+  
+3. Comparer le nombre de températures **positives** et **négatives** (en ignorant les valeurs manquantes).
+
+```r
+sum(january > 0 & !is.na(january)) > sum(january < 0 & !is.na(january))
+```
+
+5. Donner la **moyenne des températures positives** du mois.
+
+```r
+mean_pos <- round( mean( january[january > 0] , na.rm = TRUE) , 2 )
+```
+
+7. Créer un vecteur `days` correspondant aux jours du mois et donner les **jours où la température était > 0**.
+
+```r
+days <- 1:length(january)
+days[ january >0 & !is.na(january) ]
+```
+
+9. Donner toutes les températures **supérieures à 0 à partir du 10ᵉ jour**.
+
+```r
+january[days > 9 & january > 0 & !is.na(january) ]
+```
+
+11. Remplacer les **températures négatives** par la **moyenne des températures positives** (sans modifier les `NA`).
+
+```r
+# Ecrase les valeurs du vecteurs january
+january[ january < 0  & !is.na(january)] <- mean_pos
+```
 
 Voici **3 questions supplémentaires**, toujours dans le même esprit, mais avec **plus de données** et un niveau légèrement au-dessus.
 
