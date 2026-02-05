@@ -83,7 +83,12 @@ On peut continuer à faire des calculs si on est en dessous de cette valeur, pou
 ---
 
 
-## Représentation compacte (séquences en R)
+## Représentation compacte (séquences en R) à partir de R 3.5
+
+```r
+R.version.string
+# "R version 4.5.2 (2025-10-31)"
+```
 
 En R, certains objets peuvent être **représentés de manière paresseuse** :
 R ne stocke pas toutes les valeurs immédiatement, mais **sait comment les calculer à la demande**.
