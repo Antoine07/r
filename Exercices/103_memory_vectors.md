@@ -47,7 +47,7 @@ january[days > 9 & january > 0 & !is.na(january) ]
 11. Remplacer les **températures négatives** par la **moyenne des températures positives** (sans modifier les `NA`).
 
 ```r
-# Ecrase les valeurs du vecteurs january
+# Ecrase les valeurs du vecteurs january concernées
 january[ january < 0  & !is.na(january)] <- mean_pos
 ```
 
