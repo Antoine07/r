@@ -49,10 +49,14 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 
 ---
 
-### Approche par la pratique 
+### Approche par la pratique tiddle 
+
+- [comparaison SAS R](https://antoine07.github.io/r/100_requete.html)
 
 - Sur le dépôt ouvrez le dossier `Examples` et placez le ficher R dans votre dossier `RStudio`
 - [Structures tabulaires (tibble)](https://antoine07.github.io/r/105_tabular_structures.html)
+
+---
 
 ## Chapitre structure de données liste matrice
 
