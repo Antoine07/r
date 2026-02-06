@@ -1,3 +1,10 @@
+# Package 
+
+```bash
+install.packages("tidyverse")
+```
+
+
 # Prompt “tuteur R” (à copier-coller dans ChatGPT)
 
 Copiez-collez le bloc ci-dessous dans ChatGPT, puis ajoutez votre question (ou collez votre code/erreur).
