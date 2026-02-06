@@ -10,18 +10,19 @@ temps <- c(3, -2, 5, NA, 0, 7, -1, 4, 6, NA, -3, 2)
 
 1. Donner toutes les températures **strictement positives**.
 ```r
-temps[temps > 0 ]
+temps[temps > 0]
+temps[temps > 0 & !is.na(temps)]
 ```
 2. Donner toutes les températures **négatives ou nulles**.
 ```r
 temps[temps <= 0]
+temps[temps <= 0& !is.na(temps)]
 ```
 
 3. Donner les températures **non manquantes**.
 ```r
 temps[!is.na(temps)]
 ```
-
 
 
 ---
@@ -55,7 +56,8 @@ notes <- c(12, 8, NA, 15, 9, 17, 10, 6, 14, NA)
 
 1. Donner les notes **≥ 10**.
 ```r
-notes[notes >= 10]
+notes[notes >= 10 ]
+notes[notes >= 10 & !is.na(temps)]
 ```
 2. Donner les notes **< 10** (sans compter les `NA`).
 ```r
@@ -63,6 +65,8 @@ notes[notes < 10 & !is.na(notes)]
 ```
 3. Donner les **positions** des notes ≥ 10.
 ```r
+pos <- 1:length(notes)
+pos[notes >= 10]
 which(notes >= 10)
 ```
 
@@ -108,12 +112,9 @@ sales[sales <= 100]
 
 ```r
 days <- 1:length(sales)
-
 days[sales > 150]
-
-which(sales > 150)
+which(sales > 150) # Optimal car vous passez par une fonction native 
 ```
-
 
 
 ---
@@ -127,7 +128,7 @@ Créer un nouveau vecteur `sales_corr` tel que :
 * les `NA` restent inchangés
 
 ```r
-sales_corr <- sales
+sales_corr <- sales # copie de la source de vérité 
 sales_corr[sales < 100] <- 100
 sales_corr
 ```
@@ -202,7 +203,13 @@ night[night <= 0]
 sum(night > 0, na.rm = TRUE)
 
 # 3. Existe-t-il une nuit < -3 ?
-any(night < -3, na.rm = TRUE)
+
+# très astucieux bravo 
+sum(night < -3,  na.rm = TRUE) > 0
+
+any(night < -3, na.rm = TRUE) # au moins un vrai => vrai 
+
+all(c(TRUE, TRUE, TRUE, TRUE)) # tout vrai => vrai 
 ```
 
 ---
@@ -218,7 +225,7 @@ any(night < -3, na.rm = TRUE)
 
 ```r
 # 1. Toutes les températures positives sont < 10 ?
-all(temps[temps > 0] < 10)
+all(temps[temps > 0] < 10, na.rm = TRUE)
 
 # 2. Existe-t-il au moins une température > 6 ?
 any(temps > 6, na.rm = TRUE)
