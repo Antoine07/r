@@ -91,6 +91,8 @@ En data, on rencontre souvent deux formats :
 - pratique pour lire dans un tableur
 - pénible pour analyser, filtrer, regrouper
 
+---
+
 Ici par exemple :
 
 - `revenue_2025`
@@ -152,6 +154,8 @@ long <- wide |>
     values_to = "revenue"
   )
 ```
+
+---
 
 ### `wide |> ...`
 
