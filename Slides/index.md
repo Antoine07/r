@@ -15,8 +15,6 @@ Dépôt: https://github.com/Antoine07/r
 
 ## Chapitres — Introduction & setup
 
-`1h30`
-
 - [Introduction: pourquoi R ?](https://antoine07.github.io/r/000_intro_why_r.html)
 - [Installer R & RStudio](https://antoine07.github.io/r/000_install_r_rstudio.html)
 - [RStudio: workflow](https://antoine07.github.io/r/101_rstudio_workflow.html)
@@ -79,8 +77,6 @@ Optionnel si vous voulez organiser votre projet
 ---
 
 ## Pour aller plus loin 
-
-`3h30`
 
 - [`ggplot2` (introduction)](https://antoine07.github.io/r/110_ggplot2_intro.html)
 - [`ggplot2` (stat et graph)](https://antoine07.github.io/r/111_stats_graphs.html)
