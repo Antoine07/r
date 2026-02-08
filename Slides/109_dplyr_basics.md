@@ -43,7 +43,8 @@ Objectif: passer d'une table brute à des indicateurs.
 ## Préparer les données
 
 ```r
-pacman::p_load(dplyr, tidyverse)
+# install.packages("tidyverse") # une seule fois
+library(tidyverse)
 
 sales <- read_csv("TPs/r/data/sales.csv") |>
   mutate(

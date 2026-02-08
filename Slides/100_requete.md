@@ -38,7 +38,7 @@ demandeurs
 
 ---
 
-###  Moyenne d’âge par région
+###  Moyenne d'âge par région
 
 **SAS**
 
@@ -80,7 +80,7 @@ demandeurs |>
 
 ---
 
-### Demandeurs de 30 ans ou plus
+### Demandeurs âgés de 30 ans ou plus
 
 **SAS**
 
@@ -96,6 +96,15 @@ where age >= 30;
 demandeurs |>
   filter(age >= 30)
 ```
+
+*Écriture équivalente plus explicite (recommandée dans les supports et les scripts robustes) :*
+
+```r
+demandeurs |>
+  dplyr::filter(age >= 30)
+```
+
+> L'utilisation de `dplyr::filter()` permet d'indiquer explicitement le package d'origine et d'éviter toute ambiguïté avec des fonctions portant le même nom dans d'autres librairies.
 
 ---
 
@@ -144,7 +153,7 @@ demandeurs |>
 
 ---
 
-###  Moyenne d’âge des inscrits uniquement
+###  Moyenne d'âge des inscrits uniquement
 
 **SAS**
 
@@ -158,13 +167,13 @@ where statut = "Inscrit";
 
 ```r
 demandeurs |>
-  filter(statut == "Inscrit") |>
+  dplyr::filter(statut == "Inscrit") |>
   summarise(age_moyen = mean(age))
 ```
 
 ---
 
-### Nombre d’inscrits par région
+### Nombre d'inscrits par région
 
 **SAS**
 
@@ -186,59 +195,7 @@ demandeurs |>
 
 ---
 
-###  Créer une variable « tranche d’âge »
-
-```sas
-select *,
-       case
-         when age < 25 then "Jeune"
-         when age < 50 then "Adulte"
-         else "Senior"
-       end as tranche
-from demandeurs;
-```
-
-```r
-demandeurs |>
-  mutate(
-    tranche = case_when(
-      age < 25 ~ "Jeune",
-      age < 50 ~ "Adulte",
-      TRUE ~ "Senior"
-    )
-  )
-```
-
----
-
-### Nombre de demandeurs par tranche d’âge
-
-**SAS**
-
-```sas
-select tranche, count(*)
-from demandeurs
-group by tranche;
-```
-
-**R**
-
-```r
-demandeurs |>
-  mutate(
-    tranche = case_when(
-      age < 25 ~ "Jeune",
-      age < 50 ~ "Adulte",
-      TRUE ~ "Senior"
-    )
-  ) |>
-  group_by(tranche) |>
-  summarise(nb = n())
-```
-
----
-
-### Pourcentage d’inscrits
+### Pourcentage d'inscrits
 
 **SAS**
 
@@ -256,3 +213,100 @@ demandeurs |>
     taux_inscrits = mean(statut == "Inscrit")
   )
 ```
+
+---
+
+## Exemple 1 — Jointure interne (INNER JOIN)
+
+### Objectif
+
+Conserver uniquement les demandeurs dont la région est connue dans la table de correspondance.
+
+### Tables
+
+```r
+demandeurs
+```
+
+```text
+id | region
+---+--------
+1  | IDF
+2  | NAQ
+3  | OCC
+```
+
+```r
+regions
+```
+
+```text
+region | nom_region
+-------+-------------------
+IDF    | Île-de-France
+NAQ    | Nouvelle-Aquitaine
+```
+
+---
+
+### SAS
+
+```sas
+select d.*, r.nom_region
+from demandeurs d
+inner join regions r
+on d.region = r.region;
+```
+
+---
+
+### R
+
+```r
+demandeurs |>
+  inner_join(regions, by = "region")
+```
+
+---
+
+### Résultat
+
+- Seules les lignes avec une correspondance dans les deux tables sont conservées
+- La région `OCC` est supprimée (pas de correspondance)
+
+---
+
+## Exemple 2 — Jointure gauche (LEFT JOIN)
+
+### Objectif
+
+Conserver **tous les demandeurs**, même si la région n'a pas de correspondance.
+
+---
+
+### SAS
+
+```sas
+select d.*, r.nom_region
+from demandeurs d
+left join regions r
+on d.region = r.region;
+```
+
+---
+
+### R
+
+```r
+demandeurs |>
+  left_join(regions, by = "region")
+```
+
+---
+
+### Résultat
+
+- Tous les demandeurs sont conservés
+- `nom_region` vaut `NA` si aucune correspondance n'existe
+
+

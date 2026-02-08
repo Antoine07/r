@@ -22,12 +22,11 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 - [Introduction: pourquoi R ?](https://antoine07.github.io/r/000_intro_why_r.html)
 - [Installer R & RStudio](https://antoine07.github.io/r/000_install_r_rstudio.html)
 - [RStudio: workflow](https://antoine07.github.io/r/101_rstudio_workflow.html)
+- [Projet: packages (config & install)](https://antoine07.github.io/r/116_project_packages_setup.html)
 
 ---
 
 ## Exercice d'application
-
-`30min`
 
 - [Sandbox installation](https://antoine07.github.io/r/000_starter_simple.html)
 
@@ -35,26 +34,24 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 
 ## Syntaxe de base
 
-`30min`
-
-- [Syntaxe R (programmation de base)](https://antoine07.github.io/r/102_r_basics_syntax.html)
+- ✅ [Syntaxe R (programmation de base)](https://antoine07.github.io/r/102_r_basics_syntax.html)
+- [Fonctions & portée (scope)](https://antoine07.github.io/r/112_functions_scope.html)
 
 
 ## Chapitres — Fondamentaux langage / data
 
-`4h30`
-
-- [Modèle mémoire et vecteurs atomiques](https://antoine07.github.io/r/103_memory_vectors.html)
-- [Date](https://antoine07.github.io/r/114_date.html)
+- ✅ [Modèle mémoire et vecteurs atomiques](https://antoine07.github.io/r/103_memory_vectors.html)
+- ✅ [Date](https://antoine07.github.io/r/114_date.html)
+- [Dates avancées (comparaisons SAS)](https://antoine07.github.io/r/115_date_advanced_sas.html)
 
 ---
 
 ### Approche par la pratique tiddle 
 
-- [comparaison SAS R](https://antoine07.github.io/r/100_requete.html)
+- ✅ [comparaison SAS R](https://antoine07.github.io/r/100_requete.html)
 
 - Sur le dépôt ouvrez le dossier `Examples` et placez le ficher R dans votre dossier `RStudio`
-- [Structures tabulaires (tibble)](https://antoine07.github.io/r/105_tabular_structures.html)
+- ✅ [Structures tabulaires (tibble)](https://antoine07.github.io/r/105_tabular_structures.html)
 
 ---
 
@@ -74,7 +71,7 @@ Objectif: fournir une navigation vers toutes les pages HTML générées dans `do
 
 à faire par équipe et à présenter `2h`
 
-- [`TP Date *` (introduction)](https://github.com/Antoine07/r/tp_date.md)
+- ✅ [`TP Date *` (introduction)](https://github.com/Antoine07/r/tp_date.md)
 - [`TP Taxi ***` (introduction)](https://github.com/Antoine07/r/tp_final.md)
 
 Optionnel si vous voulez organiser votre projet

@@ -30,7 +30,8 @@ On utilise en général deux objets:
 `read_csv()` lit un CSV et renvoie une table (tibble).
 
 ```r
-pacman::p_load(readr)
+# install.packages("readr") # une seule fois
+library(readr)
 
 sales_raw <- read_csv("TPs/r/data/sales.csv")
 sales_raw
@@ -71,6 +72,8 @@ Problèmes typiques:
 - types cohérents (`str`, `typeof`, `as.*`)
 - valeurs manquantes (`is.na`, `sum`, `anyNA`)
 - domaines de valeurs (ex: `units >= 0`, `price >= 0`)
+
+---
 
 Bonnes pratiques 
 

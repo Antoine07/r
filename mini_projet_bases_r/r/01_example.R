@@ -16,17 +16,14 @@ df[,1:2 ]
 df[, c("region", "units")]
 
 
-if (!require("pacman", quietly = TRUE)) {
-  install.packages("pacman")
-}
-library(pacman)
-
-pacman::p_load(tibble)
+# install.packages(c("tibble", "readr", "dplyr", "ggplot2")) # une seule fois
+library(tibble)
+library(readr)
+library(dplyr)
+library(ggplot2)
 
 tibble::tibble(region = c("North", "South"), units = c(12L, 8L))
 
-
-pacman::p_load(readr)
 
 sales <- readr::read_csv("../TPs/r/data/sales.csv", show_col_types = TRUE)
 
@@ -59,8 +56,6 @@ sales <- tibble(
   units   = c(2, 1, 5, 3, 1),
   price   = c(10, 10, 8, 8, 20)
 )
-
-pacman::p_load(dplyr)
 
 sales |>
   group_by(product) |>
@@ -232,8 +227,6 @@ sales |>
     n_sales = n()
   )
 
-pacman::p_load(ggplot2, tidyverse)
-
 data(iris)
 
 glimpse(iris)
@@ -363,8 +356,6 @@ ggplot(iris, aes(x = Species, y = Petal.Length)) +
     x = "Espèce",
     y = "Longueur de pétale"
   )
-
-pacman::p_load(tidyverse)
 
 data(mtcars)
 
@@ -522,7 +513,6 @@ for (v in values) {        # 1ère boucle : la liste
 
 
 lapply(values, sum)
-
 
 
 

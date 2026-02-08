@@ -15,5 +15,4 @@ data_processed_dir <- "data/processed"
 output_tables_dir <- "output/tables"
 output_figures_dir <- "output/figures"
 
-# Création des dossiers si absents
-dir.create(processed, showWarnings = FALSE, recursive = TRUE)
+

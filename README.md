@@ -1,6 +1,7 @@
 # Package 
 
 ```bash
+install.packages("tibble") 
 install.packages("tidyverse")
 ```
 

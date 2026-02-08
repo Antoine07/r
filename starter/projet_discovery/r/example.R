@@ -169,3 +169,84 @@ dossiers |>
 dossiers |>
   group_by(mois_depot) |>
   summarise(nb_dossiers = n())
+
+d <- as.Date("2024-12-31")
+d
+d <- as.Date("2024-12-31")
+typeof(d)
+
+
+demandeurs <- tibble(
+  id = 1:12,
+  age = c(22, 34, 45, 29, 18, 41, 37, 26, 52, 31, 24, 39),
+  sexe = c("F", "H", "F", "H", "F", "H", "F", "H", "H", "F", "F", "H"),
+  region = c(
+    "IDF", "IDF", "NAQ", "IDF",
+    "NAQ", "OCC", "OCC", "NAQ",
+    "IDF", "OCC", "NAQ", "IDF"
+  ),
+  statut = c(
+    "Inscrit", "Inscrit", "Radié", "Inscrit",
+    "Inscrit", "Inscrit", "Radié", "Inscrit",
+    "Inscrit", "Radié", "Inscrit", "Inscrit"
+  )
+)
+
+demandeurs
+demandeurs |>
+  group_by(region) |>
+  summarise(age_moyen = mean(age))
+
+demandeurs |>
+  group_by(region) |>
+  summarise(nb = n())
+
+elms <- c(1,2,3)
+
+mult <- function(a, c){
+  a**3 + c
+}
+
+elms |> sum() |> mult(100)
+
+
+temps <- c(3, -2, 5, NA, 0, 7, -1, 4, 6, NA, -3, 2)
+
+
+notes <- c(12, 8, NA, 15, 9, 17, 10, 6, 14, NA)
+pos <- 1:length(notes)
+which(notes >= 10)
+pos[notes >= 10 & !is.na(notes)]
+
+notes >= 10
+!is.na(notes)
+
+sales <- c(120, 90, 150, NA, 200, 80, 60, 175, 220, 95)
+
+
+sales_corr <- sales # copie de la source de vérité 
+sales_corr[sales < 100] 
+sales_corr[sales < 100] <- 100
+sales_corr[is.na(sales)] <- median(sales, na.rm = TRUE)
+
+sales_corr
+
+all(c(TRUE, TRUE, TRUE, TRUE))
+any(c(FALSE, FALSE, FALSE, FALSE) )
+
+
+
+sales <- c(120, 90, 150, 100, 200, 80, 60, 175, 220, 95) 
+
+sum(sales)
+
+sales |> sum() |> round(2)
+
+
+
+
+
+
+
+
+
