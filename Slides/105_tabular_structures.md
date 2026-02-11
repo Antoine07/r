@@ -242,20 +242,6 @@ sales |>
 
 ---
 
-## Cube analytique — intuition métier
-
-Un cube analytique permet d'analyser une mesure
-selon **plusieurs dimensions** :
-
-- produit
-- région
-- date
-
-👉 On ne lit plus ligne par ligne
-👉 On analyse selon des axes métier
-
----
-
 ```r
 library(tibble)
 
